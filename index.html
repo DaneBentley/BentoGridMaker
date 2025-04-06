@@ -9,32 +9,28 @@
         /* --- Base & Theming --- */
         :root {
             --font-primary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            --header-height: 65px; /* Slightly taller header */
+            --header-height: 65px;
             --panel-width: 320px;
-
-            /* Glassmorphism Variables */
             --glass-blur: 20px;
             --glass-border-width: 1px;
-            --glass-bg-light: rgba(255, 255, 255, 0.6); /* Light mode glass background */
-            --glass-border-light: rgba(255, 255, 255, 0.8); /* Light mode glass border */
-            --glass-bg-dark: rgba(30, 30, 30, 0.65);  /* Dark mode glass background */
-            --glass-border-dark: rgba(255, 255, 255, 0.1); /* Dark mode glass border */
-
-            /* Light Theme */
-            --bg-primary-gradient: linear-gradient(135deg, #ece9e6 0%, #ffffff 100%); /* Body Background */
+            --glass-bg-light: rgba(255, 255, 255, 0.6);
+            --glass-border-light: rgba(255, 255, 255, 0.8);
+            --glass-bg-dark: rgba(30, 30, 30, 0.65);
+            --glass-border-dark: rgba(255, 255, 255, 0.1);
+            --bg-primary-gradient: linear-gradient(135deg, #ece9e6 0%, #ffffff 100%);
             --bg-glass: var(--glass-bg-light);
             --glass-border-color: var(--glass-border-light);
-            --bg-input: rgba(255, 255, 255, 0.7); /* Slightly transparent inputs */
-            --border-color: rgba(0, 0, 0, 0.1); /* More subtle border for inputs etc. */
-            --text-primary: #1a1a1a; /* Darker text for better contrast */
+            --bg-input: rgba(255, 255, 255, 0.7);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --text-primary: #1a1a1a;
             --text-secondary: #555555;
-            --accent-primary: #005eff; /* Slightly different blue */
+            --accent-primary: #005eff;
             --accent-primary-hover: #004acc;
             --accent-secondary: #6c757d;
             --accent-secondary-hover: #5a6268;
             --danger-color: #dc3545;
             --danger-hover: #c82333;
-            --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.06); /* Adjusted shadow */
+            --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.06);
             --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.1);
             --selected-outline-color: var(--accent-primary);
             --slider-track: rgba(0, 0, 0, 0.1);
@@ -43,32 +39,28 @@
             --status-success-text: #0f5132;
             --status-error-bg: rgba(248, 215, 218, 0.9);
             --status-error-text: #842029;
-            --box-bg-default: var(--bg-glass); /* Box default is now glass */
+            --box-bg-default: var(--bg-glass);
             --box-border-default: var(--glass-border-color);
             --box-text-default: var(--text-primary);
             --placeholder-border: rgba(0, 0, 0, 0.2);
             --placeholder-text: var(--text-secondary);
-
-            /* Grid & Box Defaults */
             --grid-padding: 15px;
             --grid-outer-padding: 20px;
-            --box-border-radius: 12px; /* More rounded for glass */
-            --grid-background-color: transparent; /* Grid container often transparent in glass */
-            --box-shadow-global: none; /* Default shadow off for boxes, glass provides depth */
+            --box-border-radius: 12px;
+            --grid-background-color: transparent;
+            --box-shadow-global: none;
             --grid-container-explicit-bg: null;
             --accent-primary-rgb: 0, 94, 255;
         }
-
         body.dark-mode {
-             /* Dark Theme */
-            --bg-primary-gradient: linear-gradient(135deg, #232526 0%, #414345 100%); /* Dark Body Background */
+            --bg-primary-gradient: linear-gradient(135deg, #232526 0%, #414345 100%);
             --bg-glass: var(--glass-bg-dark);
             --glass-border-color: var(--glass-border-dark);
-            --bg-input: rgba(50, 50, 50, 0.7); /* Dark transparent inputs */
+            --bg-input: rgba(50, 50, 50, 0.7);
             --border-color: rgba(255, 255, 255, 0.15);
-            --text-primary: #f1f1f1; /* Lighter text */
+            --text-primary: #f1f1f1;
             --text-secondary: #aaaaaa;
-            --accent-primary: #3b8aff; /* Brighter blue */
+            --accent-primary: #3b8aff;
             --accent-primary-hover: #5c9fff;
             --accent-secondary: #7a8691;
             --accent-secondary-hover: #98a0a8;
@@ -86,161 +78,50 @@
             --box-text-default: var(--text-primary);
             --placeholder-border: rgba(255, 255, 255, 0.2);
             --placeholder-text: var(--text-secondary);
-
-            --grid-background-color: var(--grid-container-explicit-bg, transparent); /* Default transparent */
+            --grid-background-color: var(--grid-container-explicit-bg, transparent);
             --box-shadow-global: none;
             --accent-primary-rgb: 59, 138, 255;
         }
-
         /* Base Styles */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body {
-            font-family: var(--font-primary);
-            background: var(--bg-primary-gradient); /* Apply gradient */
-            background-attachment: fixed; /* Keep gradient fixed during scroll */
-            color: var(--text-primary);
-            display: flex; flex-direction: column; min-height: 100vh;
-            font-size: 15px; line-height: 1.6;
-            transition: background 0.4s, color 0.4s;
-            overflow-x: hidden; /* Prevent horizontal scroll from slight overflows */
-        }
-
-        /* Glass Effect Helper */
-        .glass-effect {
-            background: var(--bg-glass);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur)); /* Safari prefix */
-            border: var(--glass-border-width) solid var(--glass-border-color);
-            box-shadow: var(--shadow-md); /* Use darker shadow for depth */
-            border-radius: var(--box-border-radius);
-            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
-        }
-
-        /* App Structure */
+        body { font-family: var(--font-primary); background: var(--bg-primary-gradient); background-attachment: fixed; color: var(--text-primary); display: flex; flex-direction: column; min-height: 100vh; font-size: 15px; line-height: 1.6; transition: background 0.4s, color 0.4s; overflow-x: hidden; }
+        .glass-effect { background: var(--bg-glass); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border: var(--glass-border-width) solid var(--glass-border-color); box-shadow: var(--shadow-md); border-radius: var(--box-border-radius); transition: background 0.3s, border-color 0.3s, box-shadow 0.3s; }
         .app-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
-        .app-header {
-            /* Apply glass effect */
-            background: var(--bg-glass);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
-            border-bottom: var(--glass-border-width) solid var(--glass-border-color);
-            box-shadow: none; /* Remove bottom shadow, rely on border/blur */
-
-            height: var(--header-height);
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0 25px; /* More padding */
-            position: sticky; top: 0; z-index: 100;
-            transition: background 0.3s, border-color 0.3s;
-        }
+        .app-header { background: var(--bg-glass); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border-bottom: var(--glass-border-width) solid var(--glass-border-color); box-shadow: none; height: var(--header-height); display: flex; align-items: center; justify-content: space-between; padding: 0 25px; position: sticky; top: 0; z-index: 100; transition: background 0.3s, border-color 0.3s; }
         .header-title { font-size: 1.4em; font-weight: 600; color: var(--text-primary); }
         .header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
         .app-content { flex-grow: 1; display: flex; flex-direction: column; padding: 25px; gap: 25px; }
-
-        /* Global Settings Section */
-        .global-settings {
-            /* Apply glass effect */
-            composes: glass-effect;
-            background: var(--bg-glass);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
-            border: var(--glass-border-width) solid var(--glass-border-color);
-            box-shadow: var(--shadow-md);
-            border-radius: var(--box-border-radius);
-
-            padding: 0;
-            display: flex; flex-wrap: wrap;
-            align-items: flex-start;
-            transition: background 0.3s;
-            overflow: hidden;
-        }
-        .settings-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            padding: 15px 25px;
-            border-bottom: 1px solid var(--glass-border-color);
-            cursor: pointer;
-        }
-        .settings-header h2 {
-            margin-bottom: 0;
-            font-size: 1.15em; font-weight: 600; color: var(--text-primary);
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-         #toggleSettingsBtn {
-             background: none; border: none; color: var(--text-secondary);
-             font-size: 1.5em; line-height: 1; padding: 0 5px; cursor: pointer;
-             transition: transform 0.3s ease;
-         }
+        .global-settings { composes: glass-effect; background: var(--bg-glass); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border: var(--glass-border-width) solid var(--glass-border-color); box-shadow: var(--shadow-md); border-radius: var(--box-border-radius); padding: 0; display: flex; flex-wrap: wrap; align-items: flex-start; transition: background 0.3s; overflow: hidden; }
+        .settings-header { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 15px 25px; border-bottom: 1px solid var(--glass-border-color); cursor: pointer; }
+        .settings-header h2 { margin-bottom: 0; font-size: 1.15em; font-weight: 600; color: var(--text-primary); padding-bottom: 0; border-bottom: none; }
+         #toggleSettingsBtn { background: none; border: none; color: var(--text-secondary); font-size: 1.5em; line-height: 1; padding: 0 5px; cursor: pointer; transition: cubic-bezier(0.075, 0.82, 0.165, 1); }
          #toggleSettingsBtn:hover { color: var(--text-primary); }
-
-         /* Collapsible Content Area */
-         #globalSettingsContent {
-             /* display: flex; Use grid for columns now */
-             display: grid; /* *** MODIFICATION: Use Grid for columns *** */
-             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* *** MODIFICATION: Responsive columns *** */
-             gap: 25px; /* Gap between columns and rows */
-             padding: 20px 25px;
-             width: 100%;
-             max-height: 1500px; /* Adjust if needed */
-             overflow: hidden;
-             transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out, border-top-width 0.5s ease-in-out;
-             border-top: 1px solid transparent; /* Start transparent for transition */
-         }
-         #globalSettingsContent.collapsed {
-             max-height: 0; padding-top: 0; padding-bottom: 0;
-             border-top-width: 0px; overflow: hidden;
-         }
-
-        /* *** MODIFICATION START: Settings Column Wrapper *** */
-        .settings-column {
-            display: flex;
-            flex-direction: column;
-            gap: 20px; /* Vertical gap within column */
-        }
-        .settings-column > h4 { /* Style for optional column headers */
-             font-weight: 600; font-size: 1em; color: var(--text-primary);
-             margin-bottom: -5px; /* Adjust spacing */
-        }
-        /* *** MODIFICATION END *** */
-
-
-        .setting-group { display: flex; flex-direction: column; gap: 8px; /* Removed min-width & flex:1 */ }
+         #globalSettingsContent { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; padding: 20px 25px; width: 100%; max-height: 1500px; overflow: hidden; transition: max-height cubic-bezier(0.075, 0.82, 0.165, 1), padding 0.5s cubic-bezier(0.075, 0.82, 0.165, 1), border-top-width 0.5s cubic-bezier(0.075, 0.82, 0.165, 1); border-top: 1px solid transparent; }
+         #globalSettingsContent.collapsed { max-height: 0; padding-top: 0; padding-bottom: 0; border-top-width: 0px; overflow: hidden; }
+        .settings-column { display: flex; flex-direction: column; gap: 20px; }
+        .settings-column > h4 { font-weight: 600; font-size: 1em; color: var(--text-primary); margin-bottom: -5px; }
+        .setting-group { display: flex; flex-direction: column; gap: 8px; }
         .setting-group label, .panel-section h4 { font-weight: 500; font-size: 0.9em; color: var(--text-secondary); margin-bottom: 4px; }
         .setting-group h4 { font-weight: 600; font-size: 1em; color: var(--text-primary); margin-bottom: 12px; }
-        .setting-group.full-width {
-            min-width: 100%; flex-basis: 100%;
-            grid-column: 1 / -1; /* Span full grid width */
-            margin-top: 15px; /* Add space above reset button */
-         }
-
-
-         /* Tips Section Styles */
-         .tips-section { /* Now just a div, column handles layout */
-            /* Removed flex-basis, border-top, padding-top, margin-top */
-         }
-         .tips-section h4 { margin-bottom: 10px; color: var(--text-primary); font-weight: 600; }
-         .tips-section ul { list-style-type: '✨'; padding-left: 25px; margin: 0; font-size: 0.9em; color: var(--text-secondary); }
-         .tips-section li { margin-bottom: 8px; padding-left: 8px; }
-         .tips-section code { background-color: var(--border-color); padding: 2px 5px; border-radius: 4px; font-size: 0.95em; color: var(--text-primary); }
-
-
-        /* Input Styling */
+        .setting-group.full-width { min-width: 100%; flex-basis: 100%; grid-column: 1 / -1; margin-top: 15px; }
+          .tips-section {}
+          .tips-section h4 { margin-bottom: 10px; color: var(--text-primary); font-weight: 600; }
+          .tips-section ul { list-style-type:'*'; padding-left: 25px; margin: 0; font-size: 0.9em; color: var(--text-secondary); }
+          .tips-section li { margin-bottom: 8px; padding-left: 8px; }
+          .tips-section code { background-color: var(--border-color); padding: 2px 5px; border-radius: 4px; font-size: 0.95em; color: var(--text-primary); }
         input[type="color"], input[type="number"], input[type="text"], select { background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px; padding: 9px 12px; font-size: 0.95em; transition: border-color 0.2s, background-color 0.2s; width: 100%; }
         input[type="color"] { height: 40px; padding: 4px; cursor: pointer; }
         input:focus, select:focus { outline: none; border-color: var(--accent-primary); box-shadow: 0 0 0 3px rgba(var(--accent-primary-rgb), 0.3); background-color: rgba(255,255,255, 0.8); }
         body.dark-mode input:focus, body.dark-mode select:focus { background-color: rgba(70, 70, 70, 0.8); }
-
-        /* Slider */
         .slider-container { display: flex; align-items: center; gap: 10px; }
-        .slider-container input[type="range"] { flex-grow: 1; cursor: pointer; appearance: none; height: 8px; background: var(--slider-track); border-radius: 4px; outline: none; transition: background 0.3s; }
-        .slider-container input[type="range"]::-webkit-slider-thumb { appearance: none; width: 18px; height: 18px; background: var(--slider-thumb); border-radius: 50%; cursor: pointer; border: none; transition: background 0.3s; }
-        .slider-container input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; background: var(--slider-thumb); border-radius: 50%; cursor: pointer; border: none; transition: background 0.3s; }
+        .gcontainer { display: flex; align-items: center; gap: 10px; }
+        .gcontainer-style { display: flex; flex-direction: column; gap: 20px; }
+        .gcontainer-style > h4 { font-weight: 600; font-size: 1em; color: var(--text-primary); margin-bottom: -5px; }
+        .slider-container input[type="range"] { flex-grow: 1; cursor: pointer; appearance: none; height: 8px; background: var(--slider-track); border-radius: 4px; outline: none; transition:cubic-bezier(0.075, 0.82, 0.165, 1); }
+        .slider-container input[type="range"]::-webkit-slider-thumb { appearance: none; width: 18px; height: 18px; background: var(--slider-thumb); border-radius: 50%; cursor: pointer; border: none; transition: cubic-bezier(0.075, 0.82, 0.165, 1); }
+        .slider-container input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; background: var(--slider-thumb); border-radius: 50%; cursor: pointer; border: none; transition: cubic-bezier(0.075, 0.82, 0.165, 1); }
         .slider-container input[type="number"] { width: 70px; flex-shrink: 0; }
-
-        /* Button Styling */
         button { padding: 10px 18px; border-radius: 8px; font-size: 0.95em; background-color: var(--accent-primary); color: #fff; border: none; cursor: pointer; transition: background-color 0.2s ease, opacity 0.2s ease; white-space: nowrap; font-weight: 500; }
         button:hover:not(:disabled) { background-color: var(--accent-primary-hover); }
         button:disabled { opacity: 0.6; cursor: not-allowed; }
@@ -248,28 +129,33 @@
         body.light-mode .secondary-button { background-color: rgba(230, 230, 230, 0.7); border: 1px solid rgba(0,0,0,0.08); }
         .secondary-button:hover:not(:disabled) { background-color: rgba(140, 145, 149, 0.9); }
         body.light-mode .secondary-button:hover:not(:disabled) { background-color: rgba(210, 210, 210, 0.9); }
-        .danger-button { background-color: rgba(220, 53, 69, 0.8); border: none; color: #fff; }
+        .danger-button { flex: 1; background-color: rgba(220, 53, 69, 0.8); border: none; color: #fff; }
         .danger-button:hover:not(:disabled) { background-color: rgba(220, 53, 69, 1); }
         .button-group { display: flex; gap: 8px; flex-wrap: wrap; }
         .small-button { padding: 5px 10px; font-size: 0.85em; }
         .icon-button { padding: 6px 8px; line-height: 1; }
         .control-button-group { display: flex; gap: 5px; }
         .control-button-group button { flex: 1; min-width: 40px; text-align: center; }
-
-        /* Bento Grid Area */
-        #bentoGridContainer { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); grid-auto-rows: minmax(130px, auto); gap: var(--grid-padding); padding: var(--grid-outer-padding); background-color: var(--grid-background-color); border-radius: var(--box-border-radius); min-height: 400px; flex-grow: 1; border: none; transition: gap 0.3s, padding 0.3s, background-color 0.3s; }
-
-        /* Bento Box Styling */
-        .bento-box { /* Apply glass effect */ composes: glass-effect; background: var(--box-bg-default); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border: var(--glass-border-width) solid var(--box-border-default); box-shadow: var(--box-shadow-global); border-radius: var(--box-border-radius); overflow: hidden; position: relative; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; cursor: grab; transition: all 0.25s ease; color: var(--box-text-default); grid-column-end: span 1; grid-row-end: span 1; }
+        #bentoGridContainer { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); grid-auto-rows: minmax(130px, auto); gap: var(--grid-padding); padding: var(--grid-outer-padding); background-color: var(--grid-background-color); border-radius: var(--box-border-radius); min-height: 400px; flex-grow: 1; border: none; transition: gap 0.3s, padding 0.3s, background-color 0.3s; background-size: cover; background-position: center; }
+        .bento-box { composes: glass-effect; background: var(--box-bg-default); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border: var(--glass-border-width) solid var(--box-border-default); box-shadow: var(--box-shadow-global); border-radius: var(--box-border-radius); overflow: hidden; position: relative; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; cursor: grab; transition: all 0.25s ease; color: var(--box-text-default); grid-column-end: span 1; grid-row-end: span 1; }
         .bento-box.selected { outline: 3px solid var(--selected-outline-color); outline-offset: 2px; box-shadow: 0 0 0 3px var(--selected-outline-color); }
         .content-wrapper { padding: 18px; flex-grow: 1; position: relative; z-index: 1; outline: none; overflow-wrap: break-word; word-break: break-word; min-height: 40px; line-height: 1.5; }
-        .content-wrapper:empty::before { color: var(--text-secondary); opacity: 0.8; content: 'Click to edit...'; font-style: italic; pointer-events: none; }
+         /* *** Hide empty placeholder when box has image *** */
+        .bento-box:not(.has-background-image) .content-wrapper:empty::before {
+            content: 'Click to edit...';
+            color: var(--text-secondary);
+            opacity: 0.8;
+            font-style: italic;
+            pointer-events: none;
+            position: absolute; /* Ensure it respects padding */
+            top: 18px; /* Match content-wrapper padding */
+            left: 18px;
+           }
+         /* *** MODIFICATION END *** */
         .bento-box img.background-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none; opacity: 0.9; }
         #add-box-placeholder { background: rgba(128, 128, 128, 0.2); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: 2px dashed var(--placeholder-border); box-shadow: none; border-radius: var(--box-border-radius); display: flex; justify-content: center; align-items: center; font-size: 2.5em; font-weight: 300; color: var(--placeholder-text); cursor: pointer; transition: all 0.2s; min-height: 130px; }
         #add-box-placeholder:hover { background: rgba(128, 128, 128, 0.3); border-color: var(--text-secondary); color: var(--text-primary); }
-
-        /* Edit Panel Styling */
-        .edit-panel { /* Apply glass effect */ background: var(--bg-glass); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border-left: var(--glass-border-width) solid var(--glass-border-color); box-shadow: -5px 0 20px rgba(0, 0, 0, 0.15); position: fixed; top: 0; right: calc(-1 * var(--panel-width) - 10px); width: var(--panel-width); height: 100%; color: var(--text-primary); transition: right 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), background 0.3s, border-color 0.3s; z-index: 1001; display: flex; flex-direction: column; }
+        .edit-panel { background: var(--bg-glass); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border-left: var(--glass-border-width) solid var(--glass-border-color); box-shadow: -5px 0 20px rgba(0, 0, 0, 0.15); position: fixed; top: 0; right: calc(-1 * var(--panel-width) - 10px); width: var(--panel-width); height: 100%; color: var(--text-primary); transition: right 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), background 0.3s, border-color 0.3s; z-index: 1001; display: flex; flex-direction: column; }
         .edit-panel.open { right: 0; }
         .panel-header { padding: 0 20px; height: var(--header-height); border-bottom: 1px solid var(--glass-border-color); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
         .panel-header h3 { margin: 0; font-size: 1.1em; font-weight: 600; }
@@ -281,48 +167,22 @@
         .panel-section small { font-size: 0.85em; color: var(--text-secondary); display: block; margin-top: 8px; }
         .panel-footer { padding: 15px 20px; border-top: 1px solid var(--glass-border-color); flex-shrink: 0; background: transparent; display: flex; gap: 10px; }
         .panel-footer button { flex: 1; }
-
-        /* Panel Overlay */
         .panel-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.0); display: none; z-index: 1000; cursor: pointer; transition: background-color 0.3s; backdrop-filter: blur(0px); }
         .panel-overlay.visible { display: block; }
-
-        /* Status Message */
-        #statusMessage { /* Apply glass effect */ background: var(--bg-glass); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border: var(--glass-border-width) solid var(--glass-border-color); box-shadow: var(--shadow-md); border-radius: 8px; position: fixed; bottom: 25px; right: 25px; padding: 12px 20px; font-size: 0.95em; z-index: 1100; opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s, border-color 0.3s; pointer-events: none; }
+        #statusMessage { background: var(--bg-glass); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border: var(--glass-border-width) solid var(--glass-border-color); box-shadow: var(--shadow-md); border-radius: 8px; position: fixed; bottom: 25px; right: 25px; padding: 12px 20px; font-size: 0.95em; z-index: 1100; opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s, border-color 0.3s; pointer-events: none; }
         #statusMessage.visible { opacity: 1; transform: translateY(0); }
         #statusMessage.success { background: var(--status-success-bg); color: var(--status-success-text); border-color: rgba(var(--status-success-text), 0.3); }
         #statusMessage.error { background: var(--status-error-bg); color: var(--status-error-text); border-color: rgba(var(--status-error-text), 0.3); }
-
-        /* SortableJS Helpers */
         .sortable-ghost { opacity: 0.8; background: var(--accent-primary); border: none; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-radius: var(--box-border-radius); }
         .sortable-chosen { box-shadow: var(--shadow-md); transform: scale(1.03); }
-
-        /* Responsive Adjustments */
-        /* Keep existing responsive rules, grid handles column wrapping */
-        @media (max-width: 900px) { /* Adjust breakpoint if needed */
-             #globalSettingsContent { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); } /* Allow fewer columns */
-        }
-        @media (max-width: 768px) {
-             .app-header { padding: 0 15px; height: auto; flex-direction: column; align-items: flex-start; padding-top: 10px; padding-bottom: 10px; gap: 10px; backdrop-filter: none; }
-             .app-content { padding: 20px; gap: 20px; }
-             .global-settings { padding: 0; }
-             .settings-header { padding: 15px 20px; }
-             #globalSettingsContent { padding: 15px 20px; grid-template-columns: 1fr; } /* Stack columns */
-             #bentoGridContainer { padding: 15px; }
-        }
-        @media (max-width: 480px) {
-             .header-actions { width: 100%; justify-content: space-around; }
-             #bentoGridContainer { padding: 10px; gap: 10px; }
-             .content-wrapper { padding: 15px; }
-             .panel-footer { flex-direction: column; }
-             .app-header { padding: 10px 15px; }
-             .app-content { padding: 15px; gap: 15px; }
-        }
-
-
+        .drag-over-box { outline: 3px dashed var(--accent-primary) !important; /* Use !important maybe needed */ outline-offset: 3px; background-color: rgba(var(--accent-primary-rgb), 0.1) !important; }
+        .drag-over-container { outline: 3px dashed var(--accent-secondary) !important; /* Use !important maybe needed */ outline-offset: -3px; background-color: rgba(108, 117, 125, 0.1) !important; }
+        @media (max-width: 900px) { #globalSettingsContent { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); } }
+        @media (max-width: 768px) { .app-header { padding: 0 15px; height: auto; flex-direction: column; align-items: flex-start; padding-top: 10px; padding-bottom: 10px; gap: 10px; backdrop-filter: none; } .app-content { padding: 20px; gap: 20px; } .global-settings { padding: 0; } .settings-header { padding: 15px 20px; } #globalSettingsContent { padding: 15px 20px; grid-template-columns: 1fr; } #bentoGridContainer { padding: 15px; } }
+        @media (max-width: 480px) { .header-actions { width: 100%; justify-content: space-around; } #bentoGridContainer { padding: 10px; gap: 10px; } .content-wrapper { padding: 15px; } .panel-footer { flex-direction: column; } .app-header { padding: 10px 15px; } .app-content { padding: 15px; gap: 15px; } }
     </style>
 </head>
 <body>
-
     <div class="app-wrapper">
         <header class="app-header">
             <div class="header-title">Bento Grid Maker</div>
@@ -332,6 +192,7 @@
                 <button id="exportBtn" class="secondary-button small-button" title="Export Design to File">Export</button>
                 <button id="importBtn" class="secondary-button small-button" title="Import Design from File">Import</button>
                 <input type="file" id="importFile" accept=".json" style="display: none;">
+                 <button id="downloadHtmlBtn" class="secondary-button small-button" title="Download Grid HTML">DL HTML</button>
                 <button id="darkModeToggle" class="secondary-button small-button">Theme</button>
             </div>
         </header>
@@ -342,53 +203,22 @@
                      <h2>Grid Settings</h2>
                      <button id="toggleSettingsBtn" class="icon-button small-button" title="Toggle Settings">&#x25BC;</button>
                  </div>
-
                  <div id="globalSettingsContent">
-                     <div class="settings-column"> <h4>Layout</h4>
-                         <div class="setting-group"> <label for="gridGapInput">Box Spacing (px)</label> <div class="slider-container"> <input type="range" id="gridGapSlider" min="0" max="50" value="15"> <input type="number" id="gridGapInput" step="1" value="15"> </div> </div>
-                         <div class="setting-group"> <label for="outerPaddingInput">Outer Padding (px)</label> <div class="slider-container"> <input type="range" id="outerPaddingSlider" min="0" max="100" value="20"> <input type="number" id="outerPaddingInput" step="1" value="20"> </div> </div>
-                         <div class="setting-group"> <label for="boxRadiusInput">Corner Radius (px)</label> <div class="slider-container"> <input type="range" id="boxRadiusSlider" min="0" max="50" value="12"> <input type="number" id="boxRadiusInput" step="1" value="12"> </div> </div>
-                         <div class="setting-group"> <label for="containerBgColorInput">Container Background</label> <input type="color" id="containerBgColorInput" value="#ffffff"> <small>Note: Often transparent in glass themes.</small></div>
-                     </div>
-
-                     <div class="settings-column"> <div class="setting-group"> <h4>Global Box Shadow</h4>
-                             <div class="slider-container"> <label for="global-shadowX" style="width: 20px;" title="Horizontal Offset">X:</label> <input type="range" id="global-shadowX" min="-20" max="20" value="0"> <input type="number" id="global-shadowXNum" step="1" value="0" style="width: 60px;"> </div>
-                             <div class="slider-container"> <label for="global-shadowY" style="width: 20px;" title="Vertical Offset">Y:</label> <input type="range" id="global-shadowY" min="-20" max="20" value="0"> <input type="number" id="global-shadowYNum" step="1" value="0" style="width: 60px;"> </div>
-                             <div class="slider-container"> <label for="global-shadowBlur" style="width: 35px;" title="Blur Radius">Blur:</label> <input type="range" id="global-shadowBlur" min="0" max="40" value="0"> <input type="number" id="global-shadowBlurNum" step="1" value="0" style="width: 60px;"> </div>
-                             <div class="slider-container"> <label for="global-shadowSpread" style="width: 45px;" title="Spread Radius">Spread:</label> <input type="range" id="global-shadowSpread" min="-20" max="20" value="0"> <input type="number" id="global-shadowSpreadNum" step="1" value="0" style="width: 60px;"> </div>
-                             <div class="slider-container"> <label for="global-shadowColor" style="width: 45px;" title="Shadow Color">Color:</label> <input type="color" id="global-shadowColor" value="#000000"> <input type="range" id="global-shadowOpacity" min="0" max="1" step="0.01" value="0.00" title="Opacity" style="flex-grow: 0.5;"> </div>
-                             <button id="global-removeShadowBtn" class="small-button secondary-button" style="margin-top: 5px;">Remove Shadow</button>
-                             <small>Note: Shadows often off/subtle in glass themes.</small>
-                         </div>
-                     </div>
-
-                     <div class="settings-column tips-column"> <div class="tips-section"> <h4>Quick Tips</h4>
-                             <ul>
-                                 <li>Click the <strong>+</strong> box to add a new item.</li>
-                                 <li><strong>Double-click</strong> an item to open the edit panel.</li>
-                                 <li>Hold <code>Ctrl</code> / <code>Cmd</code> and click items to <strong>select multiple</strong>.</li>
-                                 <li><strong>Drag & drop</strong> items to reorder them.</li>
-                                 <li>Use <strong>Export/Import</strong> to save/load designs to files.</li>
-                                 <li>Use <strong>Save/Load</strong> for quick browser storage.</li>
-                                 <li>Click the <strong>Grid Settings</strong> header to collapse/expand.</li>
-                             </ul>
-                         </div>
-                     </div>
-                    <div class="setting-group full-width">
-                        <button id="resetGridBtn" class="danger-button">Reset Entire Grid & Settings</button>
-                     </div>
+                     <div class="settings-column"> <h4>Layout</h4> <div class="setting-group"> <label for="gridGapInput">Box Spacing (px)</label> <div class="slider-container"> <input type="range" id="gridGapSlider" min="0" max="50" value="15"> <input type="number" id="gridGapInput" step="1" value="15"> </div> </div> <div class="setting-group"> <label for="outerPaddingInput">Outer Padding (px)</label> <div class="slider-container"> <input type="range" id="outerPaddingSlider" min="0" max="100" value="20"> <input type="number" id="outerPaddingInput" step="1" value="20"> </div> </div> <div class="setting-group"> <label for="boxRadiusInput">Corner Radius (px)</label> <div class="slider-container"> <input type="range" id="boxRadiusSlider" min="0" max="50" value="12"> <input type="number" id="boxRadiusInput" step="1" value="12"> </div> </div> <div class="slider-container"> <label for="containerBgColorInput"> Container Background</label> <input type="color" style="width:40px;" id="containerBgColorInput" value="#ffffff"> </div> </div>
+                     <div class="settings-column"> <div class="setting-group"> <h4>Global Box Shadow</h4> <div class="slider-container"> <label for="global-shadowX" style="width: 20px;" title="Horizontal Offset">X:</label> <input type="range" id="global-shadowX" min="-20" max="20" value="0"> <input type="number" id="global-shadowXNum" step="1" value="0" style="width: 60px;"> </div> <div class="slider-container"> <label for="global-shadowY" style="width: 20px;" title="Vertical Offset">Y:</label> <input type="range" id="global-shadowY" min="-20" max="20" value="0"> <input type="number" id="global-shadowYNum" step="1" value="0" style="width: 60px;"> </div> <div class="slider-container"> <label for="global-shadowBlur" style="width: 35px;" title="Blur Radius">Blur:</label> <input type="range" id="global-shadowBlur" min="0" max="40" value="0"> <input type="number" id="global-shadowBlurNum" step="1" value="0" style="width: 60px;"> </div> <div class="slider-container"> <label for="global-shadowSpread" style="width: 45px;" title="Spread Radius">Spread:</label> <input type="range" id="global-shadowSpread" min="-20" max="20" value="0"> <input type="number" id="global-shadowSpreadNum" step="1" value="0" style="width: 60px;"> </div> <div class="slider-container"> <label for="global-shadowColor" style="width: 45px;" title="Shadow Color">Color:</label> <input type="color" style="width: 40px;" id="global-shadowColor" value="#000000"> <input type="range" id="global-shadowOpacity" min="0" max="1" step="0.01" value="0.00" title="Opacity"> </div> <button id="global-removeShadowBtn" class="small-button secondary-button" style="margin-top: 5px;">Remove Shadow</button>  </div> </div>
+                     <div class="settings-column tips-column"> <div class="tips-section"> <h4> Tips</h4> <ul> <li><strong>Double-click</strong> an item to open the edit panel.</li>  <li>Click and drag on <strong>box border</strong> to rearrange.</li><li>Hold <code>Ctrl</code> / <code>Cmd</code> and click items to <strong>select multiple</strong>.</li> <li><code>Cmd/Ctrl + S</code> to <strong>Save</strong> (browser).</li><li><code>Cmd/Ctrl + Delete</code> to <strong>Delete</strong> selected.</li><li>Use <strong>Export/Import</strong> to save/load designs to your computer.</li>  <li>Use <strong>DL HTML</strong> to download your bento code!</li><div>  <button id="resetGridBtn" class="danger-button">RESET ALL</button> </div></ul> </div> </div>
+                     
                 </div> </section>
 
-
             <main id="bentoGridContainer" class="bento-grid">
-                <div class="bento-box placeholder" id="add-box-placeholder">+</div>
+                 <div class="bento-box placeholder" id="add-box-placeholder">+</div>
             </main>
         </div>
 
         <aside id="editPanel" class="edit-panel">
              <div class="panel-header"> <h3>Edit Box <span id="multiSelectIndicator">(Multiple)</span></h3> <button id="closePanelBtn" title="Close Panel">&times;</button> </div>
-             <div class="panel-content"> <section class="panel-section"> <h4>Background</h4> <div class="setting-group"> <label for="panel-boxColor">Color</label> <input type="color" id="panel-boxColor" value="#ffffff"> </div> <div class="setting-group"> <label for="panel-imageUrl">Image URL</label> <input type="text" id="panel-imageUrl" placeholder="https://..."> </div> <div class="button-group"> <button id="panel-applyImageBtn" class="small-button">Apply Image</button> <button id="panel-removeImageBtn" class="small-button secondary-button">Remove Image</button> </div> <small>Setting color removes image.</small> </section> <section class="panel-section"> <h4>Text</h4> <div class="setting-group"> <label for="panel-textColorInput">Color</label> <input type="color" id="panel-textColorInput" value="#333333"> </div> <div class="setting-group"> <label for="panel-fontSizeInput">Font Size (px)</label> <input type="number" id="panel-fontSizeInput" step="1" value="15"> </div> <div class="setting-group"> <label>Format</label> <div class="control-button-group"> <button id="panel-textBoldBtn" class="small-button secondary-button icon-button" title="Bold"><b>B</b></button> <button id="panel-textItalicBtn" class="small-button secondary-button icon-button" title="Italic"><i>I</i></button> <button id="panel-textUnderlineBtn" class="small-button secondary-button icon-button" title="Underline"><u>U</u></button> </div> </div> <div class="setting-group"> <label>Alignment</label> <div class="control-button-group"> <button id="panel-textAlignLeftBtn" class="small-button secondary-button icon-button" title="Align Left">L</button> <button id="panel-textAlignCenterBtn" class="small-button secondary-button icon-button" title="Align Center">C</button> <button id="panel-textAlignRightBtn" class="small-button secondary-button icon-button" title="Align Right">R</button> <button id="panel-textAlignJustifyBtn" class="small-button secondary-button icon-button" title="Justify">J</button> </div> </div> </section> <section class="panel-section"> <h4>Border</h4> <div class="setting-group"> <label for="panel-borderWidth">Width (px)</label> <div class="slider-container"> <input type="range" id="panel-borderWidthSlider" min="0" max="20" value="1"> <input type="number" id="panel-borderWidth" step="1" value="1"> </div> </div> <div class="setting-group"> <label for="panel-borderStyle">Style</label> <select id="panel-borderStyle"> <option value="none">None</option> <option value="solid" selected>Solid</option> <option value="dashed">Dashed</option> <option value="dotted">Dotted</option> </select> </div> <div class="setting-group"> <label for="panel-borderColor">Color</label> <input type="color" id="panel-borderColor" value="#ffffff"> <small>Note: Often matches glass border.</small> </div> </section> <section class="panel-section"> <h4>Size (Grid Span)</h4> <div class="setting-group"> <label>Width Span</label> <div class="control-button-group"> <button id="panel-widthMinusBtn" class="small-button secondary-button icon-button">-</button> <span id="panel-widthDisplay" class="size-display" style="text-align: center; padding: 5px 10px; border: 1px solid var(--border-color); border-radius: 6px; min-width: 40px; background: var(--bg-input);">1</span> <button id="panel-widthPlusBtn" class="small-button secondary-button icon-button">+</button> </div> </div> <div class="setting-group"> <label>Height Span</label> <div class="control-button-group"> <button id="panel-heightMinusBtn" class="small-button secondary-button icon-button">-</button> <span id="panel-heightDisplay" class="size-display" style="text-align: center; padding: 5px 10px; border: 1px solid var(--border-color); border-radius: 6px; min-width: 40px; background: var(--bg-input);">1</span> <button id="panel-heightPlusBtn" class="small-button secondary-button icon-button">+</button> </div> </div> </section> </div>
-            <div class="panel-footer"> <button id="panel-resetBoxBtn" class="secondary-button">Reset Styles</button> <button id="panel-deleteBoxBtn" class="danger-button">Delete</button> </div>
+             <div class="panel-content"> <section class="panel-section"> <section class="panel-section"> <h4>Size (Grid Span)</h4> <div class="setting-group"> <label>Width Span</label> <div class="control-button-group"> <button id="panel-widthMinusBtn" class="small-button secondary-button icon-button">-</button> <span id="panel-widthDisplay" class="size-display" style="text-align: center; padding: 5px 10px; border: 1px solid var(--border-color); border-radius: 6px; min-width: 40px; background: var(--bg-input);">1</span> <button id="panel-widthPlusBtn" class="small-button secondary-button icon-button">+</button> </div> </div> <div class="setting-group"> <label>Height Span</label> <div class="control-button-group"> <button id="panel-heightMinusBtn" class="small-button secondary-button icon-button">-</button> <span id="panel-heightDisplay" class="size-display" style="text-align: center; padding: 5px 10px; border: 1px solid var(--border-color); border-radius: 6px; min-width: 40px; background: var(--bg-input);">1</span> <button id="panel-heightPlusBtn" class="small-button secondary-button icon-button">+</button> </div> </div> </section><h4>Background</h4> <div class=".gcontainer"> <label for="panel-boxColor">Color</label> <input type="color" id="panel-boxColor" style="width: 40px;" value="#ffffff"> </div> <div class="setting-group"> <label for="panel-imageUrl">Image URL</label> <input type="text" id="panel-imageUrl" placeholder="https://..."> </div> <div class="button-group"> <button id="panel-applyImageBtn" class="small-button">Apply Image</button> <button id="panel-removeImageBtn" class="small-button secondary-button">Remove Image</button> </div> <small>Setting color removes image.</small> </section> <section class="panel-section"> <h4>Text</h4> <div class="setting-group"> <label for="panel-textColorInput">Color</label> <input type="color" id="panel-textColorInput" value="#333333"> </div> <div class="setting-group"> <label for="panel-fontSizeInput">Font Size (px)</label> <input type="number" id="panel-fontSizeInput" step="1" value="15"> </div> <div class="setting-group"> <label>Format</label> <div class="control-button-group"> <button id="panel-textBoldBtn" class="small-button secondary-button icon-button" title="Bold"><b>B</b></button> <button id="panel-textItalicBtn" class="small-button secondary-button icon-button" title="Italic"><i>I</i></button> <button id="panel-textUnderlineBtn" class="small-button secondary-button icon-button" title="Underline"><u>U</u></button> </div> </div> <div class="setting-group"> <label>Alignment</label> <div class="control-button-group"> <button id="panel-textAlignLeftBtn" class="small-button secondary-button icon-button" title="Align Left">L</button> <button id="panel-textAlignCenterBtn" class="small-button secondary-button icon-button" title="Align Center">C</button> <button id="panel-textAlignRightBtn" class="small-button secondary-button icon-button" title="Align Right">R</button> <button id="panel-textAlignJustifyBtn" class="small-button secondary-button icon-button" title="Justify">J</button> </div> </div> </section> <section class="panel-section"> <h4>Border</h4> <div class="setting-group"> <label for="panel-borderWidth">Width (px)</label> <div class="slider-container"> <input type="range" id="panel-borderWidthSlider" min="0" max="20" value="1"> <input type="number" id="panel-borderWidth" step="1" value="1"> </div> </div> <div class="setting-group"> <label for="panel-borderStyle">Style</label> <select id="panel-borderStyle"> <option value="none">None</option> <option value="solid" selected>Solid</option> <option value="dashed">Dashed</option> <option value="dotted">Dotted</option> </select> </div> <div class="setting-group"> <label for="panel-borderColor">Color</label> <input type="color" id="panel-borderColor" value="#ffffff">  </div> </section>  </div>
+             <div class="panel-footer"> <button id="panel-resetBoxBtn" class="secondary-button">Reset Styles</button> <button id="panel-deleteBoxBtn" class="danger-button">Delete</button> </div>
         </aside>
 
         <div id="panelOverlay" class="panel-overlay"></div>
@@ -411,6 +241,7 @@
             const exportBtn = document.getElementById('exportBtn');
             const importBtn = document.getElementById('importBtn');
             const importFile = document.getElementById('importFile');
+            const downloadHtmlBtn = document.getElementById('downloadHtmlBtn');
             const darkModeToggle = document.getElementById('darkModeToggle');
             const gridGapSlider = document.getElementById('gridGapSlider');
             const gridGapInput = document.getElementById('gridGapInput');
@@ -430,6 +261,7 @@
             const globalShadowColor = document.getElementById('global-shadowColor');
             const globalShadowOpacity = document.getElementById('global-shadowOpacity');
             const globalRemoveShadowBtn = document.getElementById('global-removeShadowBtn');
+            const dangerStyle = document.getElementById('DangerStyle');
             const panelBoxColor = document.getElementById('panel-boxColor');
             const panelImageUrl = document.getElementById('panel-imageUrl');
             const panelApplyImageBtn = document.getElementById('panel-applyImageBtn');
@@ -461,78 +293,338 @@
 
             // --- State Variables ---
             let editingBox = null; let selectedBoxes = new Set(); let sortableInstance = null; let statusTimeout = null; let lastUsedBoxColor = null;
-            const initialDefaults = { gap: '15px', outerPadding: '20px', radius: '12px', containerBg: 'transparent', explicitContainerBg: null, shadow: 'none' };
+            const initialDefaults = { gap: '15px', outerPadding: '20px', radius: '12px', containerBg: 'transparent', explicitContainerBg: null, explicitContainerImage: null, shadow: 'none' };
             let globalSettings = { ...initialDefaults };
+            const historyStack = []; const redoStack = []; const MAX_HISTORY = 30; let isUndoingOrRedoing = false;
+            let currentlyHighlightedElement = null; // *** ADDED for drag/drop state ***
 
-            // --- Helper Functions (Exact paste from previous step) ---
-            // Start Paste ==================================
+            // --- Helper Functions ---
              function updateStatus(message, isError = false, duration = 3500) { if (statusTimeout) clearTimeout(statusTimeout); statusMessage.textContent = message; statusMessage.className = `visible ${isError ? 'error' : 'success'}`; statusTimeout = setTimeout(() => { statusMessage.className = ''; statusMessage.textContent = ''; }, duration); }
              function linkSliderInput(slider, numberInput, callback, isFloat = false, nonNegative = false) { slider.addEventListener('input', () => { const value = isFloat ? parseFloat(slider.value).toFixed(2) : slider.value; numberInput.value = value; if (callback) callback(value); }); numberInput.addEventListener('input', () => { let value = isFloat ? parseFloat(numberInput.value) : parseInt(numberInput.value, 10); const sliderMin = parseFloat(slider.min); const sliderMax = parseFloat(slider.max); if (isNaN(value)) { value = isFloat ? 0.0 : 0; } if (nonNegative && value < 0) { value = 0; } numberInput.value = isFloat ? value.toFixed(2) : value; if (value < sliderMin) { slider.value = sliderMin; } else if (value > sliderMax) { slider.value = sliderMax; } else { slider.value = value; } if (callback) callback(numberInput.value); }); }
-             function applyStyleToSelectedBoxes(styleProperty, value) { selectedBoxes.forEach(box => { try { if (styleProperty === 'content') { const contentWrapper = box.querySelector('.content-wrapper'); if (contentWrapper) contentWrapper.innerHTML = value; } else if (styleProperty === 'gridColumnEnd' || styleProperty === 'gridRowEnd') { const numValue = parseInt(value, 10); box.style[styleProperty] = `span ${Math.max(1, numValue) || 1}`; } else if (styleProperty === 'borderWidth') { const numValue = Math.max(0, parseInt(value, 10)); box.style.borderWidth = `${numValue}px`; if (numValue === 0) { box.style.borderStyle = 'none'; } else if (box.style.borderStyle === 'none') { box.style.borderStyle = 'solid'; } } else if (styleProperty === 'borderStyle') { box.style.borderStyle = value; if (value === 'none') { box.style.borderWidth = '0px'; } else if (parseInt(box.style.borderWidth || getComputedStyle(box).borderWidth, 10) === 0) { box.style.borderWidth = '1px'; } } else if (styleProperty === 'borderColor') { box.style.borderColor = value; } else if (styleProperty === 'text') { const contentWrapper = box.querySelector('.content-wrapper'); if(contentWrapper) { if (value.property === 'color') contentWrapper.style.color = value.value; else if (value.property === 'fontSize') { const numValue = Math.max(1, parseInt(value.value, 10) || 15); contentWrapper.style.fontSize = `${numValue}px`; } else if (value.property === 'textAlign') contentWrapper.style.textAlign = value.value; } } else if (styleProperty === 'backgroundImage') { handleBackgroundImage(box, value); } else if (styleProperty === 'backgroundColor') { handleBackgroundImage(box, { action: 'remove' }); box.style.backgroundColor = value; } else { box.style[styleProperty] = value; } } catch (e) { console.error(`Style Error: ${styleProperty}=${value}`, e); } }); }
-            function updateCssVariable(variableName, value) { document.documentElement.style.setProperty(variableName, value); }
-            function getThemeDefaults() { const computed = getComputedStyle(document.documentElement); const isDark = document.body.classList.contains('dark-mode'); return { bg: computed.getPropertyValue('--box-bg-default').trim() || (isDark ? 'rgba(30, 30, 30, 0.65)' : 'rgba(255, 255, 255, 0.6)'), border: computed.getPropertyValue('--box-border-default').trim() || (isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.8)'), text: computed.getPropertyValue('--box-text-default').trim() || (isDark ? '#f1f1f1' : '#1a1a1a'), fontSize: '15px', textAlign: 'left' }; }
-            function createBentoBoxElement(config = {}) { const box = document.createElement('div'); box.classList.add('bento-box'); box.dataset.id = config.id || `box-${Date.now()}-${Math.random().toString(16).slice(2)}`; const defaults = getThemeDefaults(); let initialBgColor = lastUsedBoxColor || defaults.bg; if (config.backgroundColor) { initialBgColor = config.backgroundColor; } if (config.backgroundImage) { handleBackgroundImage(box, { url: config.backgroundImage, action: 'apply' }); box.style.backgroundColor = ''; } else { box.style.backgroundColor = initialBgColor; } box.style.borderWidth = config.borderWidth ?? '1px'; box.style.borderStyle = config.borderStyle ?? 'solid'; box.style.borderColor = config.borderColor || defaults.border; if(parseInt(box.style.borderWidth) === 0) box.style.borderStyle = 'none'; box.style.gridColumnEnd = `span ${config.spanWidth || 1}`; box.style.gridRowEnd = `span ${config.spanHeight || 1}`; const contentWrapper = document.createElement('div'); contentWrapper.classList.add('content-wrapper'); contentWrapper.setAttribute('contenteditable', 'true'); contentWrapper.innerHTML = config.content || ''; contentWrapper.style.color = config.textColor || defaults.text; contentWrapper.style.fontSize = config.fontSize || defaults.fontSize; contentWrapper.style.textAlign = config.textAlign || defaults.textAlign; box.appendChild(contentWrapper); box.addEventListener('dblclick', handleBoxDoubleClick); box.addEventListener('click', handleBoxClick); contentWrapper.addEventListener('blur', () => {}); return box; }
-            function addBox() { const newBox = createBentoBoxElement(); bentoGridContainer.insertBefore(newBox, addBoxPlaceholder); }
-            function handleBackgroundImage(box, options) { const existingImg = box.querySelector('img.background-image'); if (existingImg) { existingImg.remove(); } delete box.dataset.backgroundImage; if (options.action === 'apply' && options.url) { box.style.backgroundColor = ''; const img = document.createElement('img'); img.classList.add('background-image'); img.src = options.url; img.alt = ''; img.loading = 'lazy'; img.onerror = () => { updateStatus(`Error loading image`, true); img.remove(); box.style.backgroundColor = getThemeDefaults().bg; }; box.insertBefore(img, box.firstChild); box.dataset.backgroundImage = options.url; } else { if (!box.style.backgroundColor) { box.style.backgroundColor = getThemeDefaults().bg; } } }
+             function applyStyleToSelectedBoxes(styleProperty, value) { const targetBoxes = (value && value.targetBox) ? [value.targetBox] : selectedBoxes; if (targetBoxes.size === 0 && !(value && value.targetBox)) return; if (!isUndoingOrRedoing) saveStateForUndo(); targetBoxes.forEach(box => { try { let actualValue = (value && value.hasOwnProperty('value')) ? value.value : value; if (styleProperty === 'content') { const cw = box.querySelector('.content-wrapper'); if (cw) cw.innerHTML = actualValue; } else if (styleProperty === 'gridColumnEnd' || styleProperty === 'gridRowEnd') { const nv = parseInt(actualValue, 10); box.style[styleProperty] = `span ${Math.max(1, nv) || 1}`; } else if (styleProperty === 'borderWidth') { const nv = Math.max(0, parseInt(actualValue, 10)); box.style.borderWidth = `${nv}px`; if (nv === 0) { box.style.borderStyle = 'none'; } else if (box.style.borderStyle === 'none') { box.style.borderStyle = 'solid'; } } else if (styleProperty === 'borderStyle') { box.style.borderStyle = actualValue; if (actualValue === 'none') { box.style.borderWidth = '0px'; } else if (parseInt(box.style.borderWidth || getComputedStyle(box).borderWidth, 10) === 0) { box.style.borderWidth = '1px'; } } else if (styleProperty === 'borderColor') { box.style.borderColor = actualValue; } else if (styleProperty === 'text') { const cw = box.querySelector('.content-wrapper'); if(cw) { if (actualValue.property === 'color') cw.style.color = actualValue.value; else if (actualValue.property === 'fontSize') { const nv = Math.max(1, parseInt(actualValue.value, 10) || 15); cw.style.fontSize = `${nv}px`; } else if (actualValue.property === 'textAlign') cw.style.textAlign = actualValue.value; } } else if (styleProperty === 'backgroundImage') { handleBackgroundImage(box, actualValue); } else if (styleProperty === 'backgroundColor') { handleBackgroundImage(box, { action: 'remove' }); box.style.backgroundColor = actualValue; } else { box.style[styleProperty] = actualValue; } } catch (e) { console.error(`Style Error: ${styleProperty}=${actualValue}`, e); } }); if (value && value.targetBox && editingBox === value.targetBox) { populatePanelWithBoxStyles(editingBox); } }
+             function updateCssVariable(variableName, value) { document.documentElement.style.setProperty(variableName, value); }
+             function getThemeDefaults() { const computed = getComputedStyle(document.documentElement); const isDark = document.body.classList.contains('dark-mode'); return { bg: computed.getPropertyValue('--box-bg-default').trim() || (isDark ? 'rgba(30, 30, 30, 0.65)' : 'rgba(255, 255, 255, 0.6)'), border: computed.getPropertyValue('--box-border-default').trim() || (isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.8)'), text: computed.getPropertyValue('--box-text-default').trim() || (isDark ? '#f1f1f1' : '#1a1a1a'), fontSize: '15px', textAlign: 'left' }; }
+             function createBentoBoxElement(config = {}) { const box = document.createElement('div'); box.classList.add('bento-box'); box.dataset.id = config.id || `box-${Date.now()}-${Math.random().toString(16).slice(2)}`; const defaults = getThemeDefaults(); let initialBgColor = lastUsedBoxColor || defaults.bg; if (config.backgroundColor) { initialBgColor = config.backgroundColor; } if (config.backgroundImage) { handleBackgroundImage(box, { url: config.backgroundImage, action: 'apply' }); box.style.backgroundColor = ''; } else { box.style.backgroundColor = initialBgColor; } box.style.borderWidth = config.borderWidth ?? '1px'; box.style.borderStyle = config.borderStyle ?? 'solid'; box.style.borderColor = config.borderColor || defaults.border; if(parseInt(box.style.borderWidth) === 0) box.style.borderStyle = 'none'; box.style.gridColumnEnd = `span ${config.spanWidth || 1}`; box.style.gridRowEnd = `span ${config.spanHeight || 1}`; const contentWrapper = document.createElement('div'); contentWrapper.classList.add('content-wrapper'); contentWrapper.setAttribute('contenteditable', 'true'); contentWrapper.innerHTML = config.content || ''; contentWrapper.style.color = config.textColor || defaults.text; contentWrapper.style.fontSize = config.fontSize || defaults.fontSize; contentWrapper.style.textAlign = config.textAlign || defaults.textAlign; box.appendChild(contentWrapper); box.addEventListener('dblclick', handleBoxDoubleClick); box.addEventListener('click', handleBoxClick); contentWrapper.addEventListener('blur', () => {}); return box; }
+             function addBox() { if (!isUndoingOrRedoing) saveStateForUndo(); const newBox = createBentoBoxElement(); bentoGridContainer.insertBefore(newBox, addBoxPlaceholder); }
+
+             function handleBackgroundImage(box, options) {
+                 if (!box) return;
+                 const existingImg = box.querySelector('img.background-image');
+                 if (existingImg) { existingImg.remove(); }
+                 delete box.dataset.backgroundImage;
+                 box.classList.remove('has-background-image'); // Remove class initially
+
+                  if (options.action === 'apply' && options.url) {
+                     box.style.backgroundColor = '';
+                     const img = document.createElement('img'); img.classList.add('background-image'); img.src = options.url; img.alt = ''; img.loading = 'lazy';
+                     img.onerror = () => { updateStatus(`Error loading image`, true); img.remove(); box.style.backgroundColor = getThemeDefaults().bg; box.classList.remove('has-background-image'); };
+                     box.insertBefore(img, box.firstChild); box.dataset.backgroundImage = options.url; // Store the URL or data URI
+                     box.classList.add('has-background-image'); // Add class on successful apply
+                 } else { // Remove image action
+                     if (!box.style.backgroundColor) { box.style.backgroundColor = getThemeDefaults().bg; }
+                 }
+             }
+
              function handleBoxClick(event) { const clickedBox = event.currentTarget; if (clickedBox.classList.contains('placeholder')) return; const isCtrlPressed = event.ctrlKey || event.metaKey; if (isCtrlPressed) { if (selectedBoxes.has(clickedBox)) { selectedBoxes.delete(clickedBox); clickedBox.classList.remove('selected'); } else { selectedBoxes.add(clickedBox); clickedBox.classList.add('selected'); } } else { selectedBoxes.forEach(box => box.classList.remove('selected')); selectedBoxes.clear(); selectedBoxes.add(clickedBox); clickedBox.classList.add('selected'); } updateMultiSelectIndicator(); }
              function handleBoxDoubleClick(event) { const box = event.currentTarget; if (box.classList.contains('placeholder')) return; editingBox = box; if (!selectedBoxes.has(editingBox)) { if (!event.ctrlKey && !event.metaKey) { selectedBoxes.forEach(b => b.classList.remove('selected')); selectedBoxes.clear(); } selectedBoxes.add(editingBox); editingBox.classList.add('selected'); } populatePanelWithBoxStyles(editingBox); updateMultiSelectIndicator(); editPanel.classList.add('open'); panelOverlay.classList.add('visible'); }
              function closeEditPanel() { editPanel.classList.remove('open'); panelOverlay.classList.remove('visible'); editingBox = null; updateMultiSelectIndicator(); }
              function updateMultiSelectIndicator() { const count = selectedBoxes.size; multiSelectIndicator.style.display = (count > 1 && editPanel.classList.contains('open')) ? 'inline' : 'none'; panelDeleteBoxBtn.textContent = `Delete ${count > 0 ? '('+count+')' : ''}`; panelResetBoxBtn.disabled = count === 0; panelDeleteBoxBtn.disabled = count === 0; }
              function populatePanelWithBoxStyles(box) { if (!box) return; const computedStyle = getComputedStyle(box); const defaults = getThemeDefaults(); panelBoxColor.value = rgbToHex(box.style.backgroundColor || computedStyle.backgroundColor); panelImageUrl.value = box.dataset.backgroundImage || ''; const contentWrapper = box.querySelector('.content-wrapper'); if (contentWrapper) { const computedContentStyle = getComputedStyle(contentWrapper); panelTextColorInput.value = rgbToHex(contentWrapper.style.color || computedContentStyle.color); panelFontSizeInput.value = parseInt(contentWrapper.style.fontSize || computedContentStyle.fontSize, 10) || 15; } const borderWidth = parseInt(box.style.borderWidth || computedStyle.borderWidth, 10) || 0; panelBorderWidth.value = borderWidth; panelBorderWidthSlider.value = Math.min(panelBorderWidthSlider.max, Math.max(panelBorderWidthSlider.min, borderWidth)); panelBorderStyle.value = box.style.borderStyle || computedStyle.borderStyle || 'none'; panelBorderColor.value = rgbToHex(box.style.borderColor || defaults.border); const colSpan = parseInt(box.style.gridColumnEnd?.replace('span ', '') || '1', 10); const rowSpan = parseInt(box.style.gridRowEnd?.replace('span ', '') || '1', 10); panelWidthDisplay.textContent = colSpan; panelHeightDisplay.textContent = rowSpan; panelWidthMinusBtn.disabled = colSpan <= 1; panelWidthPlusBtn.disabled = false; panelHeightMinusBtn.disabled = rowSpan <= 1; panelHeightPlusBtn.disabled = false; }
              function rgbToHex(rgb) { if (!rgb || typeof rgb !== 'string' || rgb === 'transparent') { return getThemeDefaults().bg; } if (rgb.startsWith('#')) return rgb; let match = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*[\d.]+)?\)$/); if (!match) return getThemeDefaults().bg; function hex(x) { return ('0' + parseInt(x).toString(16)).slice(-2); } return '#' + hex(match[1]) + hex(match[2]) + hex(match[3]); }
-             function resetSelectedBoxStyles() { if (selectedBoxes.size === 0) return; if (!confirm(`Reset styles for ${selectedBoxes.size} selected box(es)?`)) return; const defaults = getThemeDefaults(); selectedBoxes.forEach(box => { handleBackgroundImage(box, { action: 'remove' }); box.style.backgroundColor = defaults.bg; box.style.borderWidth = '1px'; box.style.borderStyle = 'solid'; box.style.borderColor = defaults.border; box.style.gridColumnEnd = 'span 1'; box.style.gridRowEnd = 'span 1'; const contentWrapper = box.querySelector('.content-wrapper'); if(contentWrapper) { contentWrapper.style.color = defaults.text; contentWrapper.style.fontSize = defaults.fontSize; contentWrapper.style.textAlign = defaults.textAlign; } }); if (editingBox && selectedBoxes.has(editingBox)) { populatePanelWithBoxStyles(editingBox); } updateStatus(`Reset styles for ${selectedBoxes.size} box(es).`, false); }
-            function deleteSelectedBoxes() { if (selectedBoxes.size === 0) { updateStatus("No box selected", true); return; } if (confirm(`Delete ${selectedBoxes.size} selected box(es)?`)) { selectedBoxes.forEach(box => { box.remove(); }); selectedBoxes.clear(); closeEditPanel(); updateStatus("Box(es) deleted.", false); updateMultiSelectIndicator(); } }
-            function resizeSelectedBoxes(dimension, delta) { selectedBoxes.forEach(box => { const styleProp = dimension === 'width' ? 'gridColumnEnd' : 'gridRowEnd'; let currentSpan = parseInt(box.style[styleProp]?.replace('span ', '') || '1', 10); let newSpan = Math.max(1, currentSpan + delta); box.style[styleProp] = `span ${newSpan}`; }); if (editingBox && selectedBoxes.has(editingBox)) { populatePanelWithBoxStyles(editingBox); } }
-            function applyGlobalGap(value) { const val = `${Math.max(0, parseInt(value)) || 0}px`; updateCssVariable('--grid-padding', val); globalSettings.gap = val; }
-            function applyGlobalPadding(value) { const val = `${Math.max(0, parseInt(value)) || 0}px`; updateCssVariable('--grid-outer-padding', val); globalSettings.outerPadding = val; }
-            function applyGlobalRadius(value) { const val = `${Math.max(0, parseInt(value)) || 0}px`; updateCssVariable('--box-border-radius', val); globalSettings.radius = val; }
-            function applyContainerBackground(value) { globalSettings.containerBg = value; globalSettings.explicitContainerBg = value; updateCssVariable('--grid-container-explicit-bg', value); updateCssVariable('--grid-background-color', value); }
-            function applyGlobalShadow() { const x = `${parseInt(globalShadowXNum.value) || 0}px`; const y = `${parseInt(globalShadowYNum.value) || 0}px`; const blur = `${Math.max(0, parseInt(globalShadowBlurNum.value)) || 0}px`; const spread = `${parseInt(globalShadowSpreadNum.value) || 0}px`; const color = hexToRgba(globalShadowColor.value, globalShadowOpacity.value); const shadowValue = (x === '0px' && y === '0px' && blur === '0px' && spread === '0px') || parseFloat(globalShadowOpacity.value) === 0 ? 'none' : `${x} ${y} ${blur} ${spread} ${color}`; updateCssVariable('--box-shadow-global', shadowValue); globalSettings.shadow = shadowValue; }
-            function removeGlobalShadow() { globalShadowX.value = 0; globalShadowXNum.value = 0; globalShadowY.value = 0; globalShadowYNum.value = 0; globalShadowBlur.value = 0; globalShadowBlurNum.value = 0; globalShadowSpread.value = 0; globalShadowSpreadNum.value = 0; globalShadowColor.value = '#000000'; globalShadowOpacity.value = 0.0; updateCssVariable('--box-shadow-global', 'none'); globalSettings.shadow = 'none'; }
-            function hexToRgba(hex, opacity) { let r = 0, g = 0, b = 0; if (hex.length == 4) { r = parseInt(hex[1] + hex[1], 16); g = parseInt(hex[2] + hex[2], 16); b = parseInt(hex[3] + hex[3], 16); } else if (hex.length == 7) { r = parseInt(hex[1] + hex[2], 16); g = parseInt(hex[3] + hex[4], 16); b = parseInt(hex[5] + hex[6], 16); } return `rgba(${r}, ${g}, ${b}, ${opacity})`; }
-            function toggleDarkMode() { const body = document.body; body.classList.toggle('dark-mode'); const isDarkMode = body.classList.contains('dark-mode'); localStorage.setItem('bentoTheme', isDarkMode ? 'dark' : 'light'); if (!globalSettings.explicitContainerBg) { const defaultThemeBg = 'transparent'; updateCssVariable('--grid-background-color', defaultThemeBg); globalSettings.containerBg = defaultThemeBg; containerBgColorInput.value = rgbToHex(defaultThemeBg); } darkModeToggle.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode'; updateStatus(`Switched to ${isDarkMode ? 'Dark' : 'Light'} Mode`, false, 1500); reloadDefaultsForThemeChange(); }
-            function applyInitialTheme() { const savedTheme = localStorage.getItem('bentoTheme'); const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; const isDarkMode = savedTheme === 'dark' || (!savedTheme && prefersDark); if (isDarkMode) { document.body.classList.add('dark-mode'); } else { document.body.classList.remove('dark-mode'); } darkModeToggle.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode'; }
-            function reloadDefaultsForThemeChange() { const defaults = getThemeDefaults(); Array.from(bentoGridContainer.children).filter(el => !el.classList.contains('placeholder')).forEach(box => { if (!box.style.backgroundColor && !box.dataset.backgroundImage) box.style.backgroundColor = defaults.bg; if (!box.style.borderColor) box.style.borderColor = defaults.border; const content = box.querySelector('.content-wrapper'); if (content && !content.style.color) content.style.color = defaults.text; if (content && !content.style.fontSize) content.style.fontSize = defaults.fontSize; }); if (globalSettings.shadow === 'none') { updateCssVariable('--box-shadow-global', 'none'); } }
+
+             function resetSelectedBoxStyles() { if (selectedBoxes.size === 0) return; if (!confirm(`Reset styles for ${selectedBoxes.size} selected box(es)?`)) return; if (!isUndoingOrRedoing) saveStateForUndo(); const defaults = getThemeDefaults(); selectedBoxes.forEach(box => { handleBackgroundImage(box, { action: 'remove' }); box.style.backgroundColor = defaults.bg; box.style.borderWidth = '1px'; box.style.borderStyle = 'solid'; box.style.borderColor = defaults.border; box.style.gridColumnEnd = 'span 1'; box.style.gridRowEnd = 'span 1'; const contentWrapper = box.querySelector('.content-wrapper'); if(contentWrapper) { contentWrapper.style.color = defaults.text; contentWrapper.style.fontSize = defaults.fontSize; contentWrapper.style.textAlign = defaults.textAlign; } box.classList.remove('has-background-image'); /* Remove class on reset */ }); if (editingBox && selectedBoxes.has(editingBox)) { populatePanelWithBoxStyles(editingBox); } updateStatus(`Reset styles for ${selectedBoxes.size} box(es).`, false); }
+
+             function deleteSelectedBoxes(skipConfirm = false) { if (selectedBoxes.size === 0) { updateStatus("No box selected", true); return; } if (skipConfirm || confirm(`Delete ${selectedBoxes.size} selected box(es)?`)) { if (!isUndoingOrRedoing) saveStateForUndo(); selectedBoxes.forEach(box => { box.remove(); }); selectedBoxes.clear(); closeEditPanel(); updateStatus("Box(es) deleted.", false); updateMultiSelectIndicator(); } }
+             function resizeSelectedBoxes(dimension, delta) { if (selectedBoxes.size === 0) return; if (!isUndoingOrRedoing) saveStateForUndo(); selectedBoxes.forEach(box => { const styleProp = dimension === 'width' ? 'gridColumnEnd' : 'gridRowEnd'; let currentSpan = parseInt(box.style[styleProp]?.replace('span ', '') || '1', 10); let newSpan = Math.max(1, currentSpan + delta); box.style[styleProp] = `span ${newSpan}`; }); if (editingBox && selectedBoxes.has(editingBox)) { populatePanelWithBoxStyles(editingBox); } }
+             function applyGlobalGap(value) { const val = `${Math.max(0, parseInt(value)) || 0}px`; updateCssVariable('--grid-padding', val); globalSettings.gap = val; }
+             function applyGlobalPadding(value) { const val = `${Math.max(0, parseInt(value)) || 0}px`; updateCssVariable('--grid-outer-padding', val); globalSettings.outerPadding = val; }
+             function applyGlobalRadius(value) { const val = `${Math.max(0, parseInt(value)) || 0}px`; updateCssVariable('--box-border-radius', val); globalSettings.radius = val; }
+             function applyContainerBackground(value, isImage = false) { if (!isUndoingOrRedoing) saveStateForUndo(); if (isImage && value) { globalSettings.explicitContainerImage = value; globalSettings.explicitContainerBg = null; bentoGridContainer.style.backgroundImage = `url(${value})`; bentoGridContainer.style.backgroundColor = ''; containerBgColorInput.value = rgbToHex(''); } else { globalSettings.explicitContainerImage = null; globalSettings.explicitContainerBg = value; bentoGridContainer.style.backgroundImage = 'none'; bentoGridContainer.style.backgroundColor = value; updateCssVariable('--grid-container-explicit-bg', value); updateCssVariable('--grid-background-color', value); } globalSettings.containerBg = value || 'transparent'; }
+             function applyGlobalShadow() { const x = `${parseInt(globalShadowXNum.value) || 0}px`; const y = `${parseInt(globalShadowYNum.value) || 0}px`; const blur = `${Math.max(0, parseInt(globalShadowBlurNum.value)) || 0}px`; const spread = `${parseInt(globalShadowSpreadNum.value) || 0}px`; const color = hexToRgba(globalShadowColor.value, globalShadowOpacity.value); const shadowValue = (x === '0px' && y === '0px' && blur === '0px' && spread === '0px') || parseFloat(globalShadowOpacity.value) === 0 ? 'none' : `${x} ${y} ${blur} ${spread} ${color}`; updateCssVariable('--box-shadow-global', shadowValue); globalSettings.shadow = shadowValue; }
+             function removeGlobalShadow() { globalShadowX.value = 0; globalShadowXNum.value = 0; globalShadowY.value = 0; globalShadowYNum.value = 0; globalShadowBlur.value = 0; globalShadowBlurNum.value = 0; globalShadowSpread.value = 0; globalShadowSpreadNum.value = 0; globalShadowColor.value = '#000000'; globalShadowOpacity.value = 0.0; updateCssVariable('--box-shadow-global', 'none'); globalSettings.shadow = 'none'; }
+             function hexToRgba(hex, opacity) { let r = 0, g = 0, b = 0; if (hex.length == 4) { r = parseInt(hex[1] + hex[1], 16); g = parseInt(hex[2] + hex[2], 16); b = parseInt(hex[3] + hex[3], 16); } else if (hex.length == 7) { r = parseInt(hex[1] + hex[2], 16); g = parseInt(hex[3] + hex[4], 16); b = parseInt(hex[5] + hex[6], 16); } return `rgba(${r}, ${g}, ${b}, ${opacity})`; }
+             function toggleDarkMode() { const body = document.body; body.classList.toggle('dark-mode'); const isDarkMode = body.classList.contains('dark-mode'); localStorage.setItem('bentoTheme', isDarkMode ? 'dark' : 'light'); if (globalSettings.explicitContainerImage) { bentoGridContainer.style.backgroundImage = `url(${globalSettings.explicitContainerImage})`; bentoGridContainer.style.backgroundColor = ''; } else if (globalSettings.explicitContainerBg) { bentoGridContainer.style.backgroundImage = 'none'; bentoGridContainer.style.backgroundColor = globalSettings.explicitContainerBg; updateCssVariable('--grid-background-color', globalSettings.explicitContainerBg); } else { const defaultThemeBg = 'transparent'; bentoGridContainer.style.backgroundImage = 'none'; bentoGridContainer.style.backgroundColor = ''; updateCssVariable('--grid-background-color', defaultThemeBg); globalSettings.containerBg = defaultThemeBg; containerBgColorInput.value = rgbToHex(defaultThemeBg); } darkModeToggle.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode'; updateStatus(`Switched to ${isDarkMode ? 'Dark' : 'Light'} Mode`, false, 1500); reloadDefaultsForThemeChange(); }
+             function applyInitialTheme() { const savedTheme = localStorage.getItem('bentoTheme'); const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; const isDarkMode = savedTheme === 'dark' || (!savedTheme && prefersDark); if (isDarkMode) { document.body.classList.add('dark-mode'); } else { document.body.classList.remove('dark-mode'); } darkModeToggle.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode'; }
+             function reloadDefaultsForThemeChange() { const defaults = getThemeDefaults(); Array.from(bentoGridContainer.children).filter(el => !el.classList.contains('placeholder')).forEach(box => { if (!box.style.backgroundColor && !box.dataset.backgroundImage) box.style.backgroundColor = defaults.bg; if (!box.style.borderColor) box.style.borderColor = defaults.border; const content = box.querySelector('.content-wrapper'); if (content && !content.style.color) content.style.color = defaults.text; if (content && !content.style.fontSize) content.style.fontSize = defaults.fontSize; }); if (globalSettings.shadow === 'none') { updateCssVariable('--box-shadow-global', 'none'); } }
              function formatText(command, value = null) { let targetElement = document.activeElement; let foundEditable = false; selectedBoxes.forEach(box => { const editable = box.querySelector('.content-wrapper'); if (editable && editable === targetElement) { foundEditable = true; } }); if (!foundEditable && selectedBoxes.size > 0) { const firstSelectedBox = selectedBoxes.values().next().value; targetElement = firstSelectedBox?.querySelector('.content-wrapper'); } if (targetElement && targetElement.getAttribute('contenteditable') === 'true') { targetElement.focus(); document.execCommand(command, false, value); } else { updateStatus("Select text in a box first", true, 2000); } }
-             function getCurrentDesignState() { const boxesData = []; const currentBoxes = Array.from(bentoGridContainer.children).filter(el => !el.classList.contains('placeholder')); currentBoxes.forEach((box, index) => { const contentWrapper = box.querySelector('.content-wrapper'); const img = box.querySelector('img.background-image'); boxesData.push({ id: box.dataset.id, order: index, content: contentWrapper ? contentWrapper.innerHTML : '', backgroundColor: box.style.backgroundColor, backgroundImage: img ? img.src : null, textColor: contentWrapper ? contentWrapper.style.color : '', fontSize: contentWrapper ? contentWrapper.style.fontSize : '', textAlign: contentWrapper ? contentWrapper.style.textAlign : '', borderWidth: box.style.borderWidth, borderStyle: box.style.borderStyle, borderColor: box.style.borderColor, spanWidth: parseInt(box.style.gridColumnEnd?.replace('span ', '') || '1', 10), spanHeight: parseInt(box.style.gridRowEnd?.replace('span ', '') || '1', 10), }); }); return { globalSettings: { ...globalSettings }, boxes: boxesData, theme: document.body.classList.contains('dark-mode') ? 'dark' : 'light' }; }
-             function saveDesignToLocalStorage() { try { const designState = getCurrentDesignState(); localStorage.setItem('bentoDesign', JSON.stringify(designState)); updateStatus('Design saved to browser!', false); } catch (error) { console.error("Save Error:", error); updateStatus(`Save Error: ${error.message}`, true); } }
+             function getCurrentDesignState() { const boxesData = []; const currentBoxes = Array.from(bentoGridContainer.children).filter(el => !el.classList.contains('placeholder')); currentBoxes.forEach((box, index) => { const contentWrapper = box.querySelector('.content-wrapper'); const img = box.querySelector('img.background-image'); boxesData.push({ id: box.dataset.id, order: index, content: contentWrapper ? contentWrapper.innerHTML : '', backgroundColor: box.style.backgroundColor, backgroundImage: box.dataset.backgroundImage, // This saves the URL or data URI
+                textColor: contentWrapper ? contentWrapper.style.color : '', fontSize: contentWrapper ? contentWrapper.style.fontSize : '', textAlign: contentWrapper ? contentWrapper.style.textAlign : '', borderWidth: box.style.borderWidth, borderStyle: box.style.borderStyle, borderColor: box.style.borderColor, spanWidth: parseInt(box.style.gridColumnEnd?.replace('span ', '') || '1', 10), spanHeight: parseInt(box.style.gridRowEnd?.replace('span ', '') || '1', 10), }); }); return { globalSettings: { ...globalSettings }, boxes: boxesData, theme: document.body.classList.contains('dark-mode') ? 'dark' : 'light' }; }
+             function saveDesignToLocalStorage() { try { const designState = getCurrentDesignState(); localStorage.setItem('bentoDesign', JSON.stringify(designState)); updateStatus('Design saved to browser!', false); } catch (error) { console.error("Save Error:", error); updateStatus(`Save Error: ${error.message}`, true); if (error.name === 'QuotaExceededError') { updateStatus('Save Error: Browser storage full. Remove large images or export design.', true, 5000); } } }
              function loadDesignFromLocalStorage() { const savedState = localStorage.getItem('bentoDesign'); if (!savedState) { updateStatus('No design saved in browser.', false); return false; } try { const designState = JSON.parse(savedState); applyDesignState(designState); updateStatus('Design loaded from browser!', false); return true; } catch (error) { console.error("Load Error:", error); updateStatus(`Load Error: ${error.message}`, true); return false; } }
              function exportDesign() { try { const designState = getCurrentDesignState(); const jsonString = JSON.stringify(designState, null, 2); const blob = new Blob([jsonString], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `bento-design-${Date.now()}.json`; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); updateStatus('Design exported!', false); } catch (error) { console.error("Export Error:", error); updateStatus(`Export Error: ${error.message}`, true); } }
              function triggerImport() { importFile.click(); }
-             function importDesignFromFile(event) { const file = event.target.files[0]; if (!file) return; if (!file.type.match('application/json')) { updateStatus('Import failed: File must be a .json file', true); return; } const reader = new FileReader(); reader.onload = (e) => { try { const jsonContent = e.target.result; const designState = JSON.parse(jsonContent); if (!designState || typeof designState !== 'object' || !designState.boxes || !designState.globalSettings) { throw new Error("Invalid file format."); } applyDesignState(designState); updateStatus('Design imported successfully!', false); } catch (error) { console.error("Import Error:", error); updateStatus(`Import Error: ${error.message}`, true); } finally { event.target.value = null; } }; reader.onerror = () => { updateStatus('Error reading file.', true); event.target.value = null; }; reader.readAsText(file); }
-             function applyDesignState(designState) { Array.from(bentoGridContainer.children).forEach(child => { if (!child.classList.contains('placeholder')) { child.remove(); } }); selectedBoxes.clear(); closeEditPanel(); const isDarkMode = designState.theme === 'dark'; if (isDarkMode) { document.body.classList.add('dark-mode'); } else { document.body.classList.remove('dark-mode'); } darkModeToggle.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode'; const loadedGlobals = designState.globalSettings; globalSettings = { ...initialDefaults, ...loadedGlobals }; gridGapInput.value = parseInt(globalSettings.gap) || 0; gridGapSlider.value = Math.min(gridGapSlider.max, Math.max(gridGapSlider.min, gridGapInput.value)); applyGlobalGap(gridGapInput.value); outerPaddingInput.value = parseInt(globalSettings.outerPadding) || 0; outerPaddingSlider.value = Math.min(outerPaddingSlider.max, Math.max(outerPaddingSlider.min, outerPaddingInput.value)); applyGlobalPadding(outerPaddingInput.value); boxRadiusInput.value = parseInt(globalSettings.radius) || 0; boxRadiusSlider.value = Math.min(boxRadiusSlider.max, Math.max(boxRadiusSlider.min, boxRadiusInput.value)); applyGlobalRadius(boxRadiusInput.value); globalSettings.explicitContainerBg = loadedGlobals.explicitContainerBg; updateCssVariable('--grid-container-explicit-bg', globalSettings.explicitContainerBg); const defaultThemeBg = 'transparent'; const bgToApply = globalSettings.explicitContainerBg || defaultThemeBg; updateCssVariable('--grid-background-color', bgToApply); containerBgColorInput.value = rgbToHex(bgToApply); globalSettings.shadow = loadedGlobals.shadow || 'none'; updateCssVariable('--box-shadow-global', globalSettings.shadow); if (globalSettings.shadow === 'none') { removeGlobalShadow(); } designState.boxes.sort((a, b) => a.order - b.order); designState.boxes.forEach(boxData => { const newBox = createBentoBoxElement(boxData); bentoGridContainer.insertBefore(newBox, addBoxPlaceholder); }); updateMultiSelectIndicator(); }
-            // --- End Paste ---
+             function importDesignFromFile(event) { const file = event.target.files[0]; if (!file) return; if (!file.type.match('application/json')) { updateStatus('Import failed: File must be a .json file', true); return; } const reader = new FileReader(); reader.onload = (e) => { try { const jsonContent = e.target.result; const designState = JSON.parse(jsonContent); if (!designState || typeof designState !== 'object' || !designState.boxes || !designState.globalSettings) { throw new Error("Invalid file format."); } applyDesignState(designState); updateStatus('Design imported successfully!', false); historyStack.length = 0; redoStack.length = 0; saveStateForUndo(); } catch (error) { console.error("Import Error:", error); updateStatus(`Import Error: ${error.message}`, true); } finally { event.target.value = null; } }; reader.onerror = () => { updateStatus('Error reading file.', true); event.target.value = null; }; reader.readAsText(file); }
+
+             function applyDesignState(designState, fromUndoRedo = false) {
+                 isUndoingOrRedoing = fromUndoRedo;
+                 try {
+                     Array.from(bentoGridContainer.children).forEach(child => { if (!child.classList.contains('placeholder')) { child.remove(); } }); selectedBoxes.clear(); closeEditPanel();
+                     const isDarkMode = designState.theme === 'dark'; if (isDarkMode) { document.body.classList.add('dark-mode'); } else { document.body.classList.remove('dark-mode'); } darkModeToggle.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+                     const loadedGlobals = designState.globalSettings; globalSettings = { ...initialDefaults, ...loadedGlobals }; gridGapInput.value = parseInt(globalSettings.gap) || 0; gridGapSlider.value = Math.min(gridGapSlider.max, Math.max(gridGapSlider.min, gridGapInput.value)); applyGlobalGap(gridGapInput.value); outerPaddingInput.value = parseInt(globalSettings.outerPadding) || 0; outerPaddingSlider.value = Math.min(outerPaddingSlider.max, Math.max(outerPaddingSlider.min, outerPaddingInput.value)); applyGlobalPadding(outerPaddingInput.value); boxRadiusInput.value = parseInt(globalSettings.radius) || 0; boxRadiusSlider.value = Math.min(boxRadiusSlider.max, Math.max(boxRadiusSlider.min, boxRadiusInput.value)); applyGlobalRadius(boxRadiusInput.value);
+                     globalSettings.explicitContainerImage = loadedGlobals.explicitContainerImage; globalSettings.explicitContainerBg = loadedGlobals.explicitContainerBg; updateCssVariable('--grid-container-explicit-bg', globalSettings.explicitContainerBg);
+                     if (globalSettings.explicitContainerImage) { bentoGridContainer.style.backgroundImage = `url(${globalSettings.explicitContainerImage})`; bentoGridContainer.style.backgroundColor = ''; containerBgColorInput.value = rgbToHex(''); }
+                     else if (globalSettings.explicitContainerBg) { bentoGridContainer.style.backgroundImage = 'none'; bentoGridContainer.style.backgroundColor = globalSettings.explicitContainerBg; updateCssVariable('--grid-background-color', globalSettings.explicitContainerBg); containerBgColorInput.value = rgbToHex(globalSettings.explicitContainerBg); }
+                     else { bentoGridContainer.style.backgroundImage = 'none'; const defaultThemeBg = 'transparent'; bentoGridContainer.style.backgroundColor = ''; updateCssVariable('--grid-background-color', defaultThemeBg); containerBgColorInput.value = rgbToHex(defaultThemeBg); }
+                     globalSettings.shadow = loadedGlobals.shadow || 'none'; updateCssVariable('--box-shadow-global', globalSettings.shadow); if (globalSettings.shadow === 'none') { removeGlobalShadow(); }
+                     designState.boxes.sort((a, b) => a.order - b.order);
+                     designState.boxes.forEach(boxData => {
+                         const newBox = createBentoBoxElement(boxData);
+                         // Ensure has-background-image class is correctly set on load
+                         if(boxData.backgroundImage) {
+                             newBox.classList.add('has-background-image');
+                         }
+                         bentoGridContainer.insertBefore(newBox, addBoxPlaceholder);
+                     });
+                     updateMultiSelectIndicator();
+                 } finally {
+                     isUndoingOrRedoing = false;
+                 }
+             }
 
             // --- Reset Grid Function ---
-            function resetGrid() {
-                if (!confirm("Reset Grid?\nThis removes all boxes, resets global settings, and clears the browser save.")) { return; }
-                Array.from(bentoGridContainer.children).forEach(child => { if (!child.classList.contains('placeholder')) { child.remove(); } });
-                selectedBoxes.clear(); closeEditPanel();
-                globalSettings = { ...initialDefaults }; // Reset state
-                applyGlobalGap(parseInt(globalSettings.gap)); gridGapInput.value = parseInt(globalSettings.gap); gridGapSlider.value = parseInt(globalSettings.gap);
-                applyGlobalPadding(parseInt(globalSettings.outerPadding)); outerPaddingInput.value = parseInt(globalSettings.outerPadding); outerPaddingSlider.value = parseInt(globalSettings.outerPadding);
-                applyGlobalRadius(parseInt(globalSettings.radius)); boxRadiusInput.value = parseInt(globalSettings.radius); boxRadiusSlider.value = parseInt(globalSettings.radius);
-                applyContainerBackground(globalSettings.containerBg); containerBgColorInput.value = rgbToHex(globalSettings.containerBg);
-                removeGlobalShadow(); // Reset shadow controls and apply 'none'
-                lastUsedBoxColor = null;
-                localStorage.removeItem('bentoDesign'); // Clear browser save
-                updateStatus("Grid reset to default.", false); updateMultiSelectIndicator();
-            }
-
+            function resetGrid() { if (!confirm("Reset Grid?\nThis removes all boxes, resets global settings, and clears the browser save.")) { return; } saveStateForUndo(); Array.from(bentoGridContainer.children).forEach(child => { if (!child.classList.contains('placeholder')) { child.remove(); } }); selectedBoxes.clear(); closeEditPanel(); globalSettings = { ...initialDefaults }; applyGlobalGap(parseInt(globalSettings.gap)); gridGapInput.value = parseInt(globalSettings.gap); gridGapSlider.value = parseInt(globalSettings.gap); applyGlobalPadding(parseInt(globalSettings.outerPadding)); outerPaddingInput.value = parseInt(globalSettings.outerPadding); outerPaddingSlider.value = parseInt(globalSettings.outerPadding); applyGlobalRadius(parseInt(globalSettings.radius)); boxRadiusInput.value = parseInt(globalSettings.radius); boxRadiusSlider.value = parseInt(globalSettings.radius); globalSettings.explicitContainerImage = null; globalSettings.explicitContainerBg = null; bentoGridContainer.style.backgroundImage = 'none'; applyContainerBackground(globalSettings.containerBg); containerBgColorInput.value = rgbToHex(globalSettings.containerBg); removeGlobalShadow(); lastUsedBoxColor = null; localStorage.removeItem('bentoDesign'); updateStatus("Grid reset to default.", false); updateMultiSelectIndicator(); }
              // --- Toggle Settings Collapse Function ---
-             function toggleSettingsVisibility() {
-                const isCollapsed = globalSettingsContent.classList.toggle('collapsed');
-                toggleSettingsBtn.innerHTML = isCollapsed ? '&#x25B6;' : '&#x25BC;'; // Right arrow / Down arrow
-                toggleSettingsBtn.title = isCollapsed ? 'Expand Settings' : 'Collapse Settings';
-                 settingsHeaderToggle.parentElement.classList.toggle('is-collapsed', isCollapsed);
+             function toggleSettingsVisibility() { const isCollapsed = globalSettingsContent.classList.toggle('collapsed'); toggleSettingsBtn.innerHTML = isCollapsed ? '&#x25B6;' : '&#x25BC;'; toggleSettingsBtn.title = isCollapsed ? 'Expand Settings' : 'Collapse Settings'; settingsHeaderToggle.parentElement.classList.toggle('is-collapsed', isCollapsed); }
+            // --- Undo/Redo Functions ---
+            function saveStateForUndo() { if (isUndoingOrRedoing) return; const currentState = getCurrentDesignState(); if (historyStack.length > 0 && JSON.stringify(currentState) === JSON.stringify(historyStack[historyStack.length - 1])) { return; } historyStack.push(currentState); redoStack.length = 0; if (historyStack.length > MAX_HISTORY) { historyStack.shift(); } }
+            function undo() { if (historyStack.length === 0) { updateStatus("Nothing to undo.", false, 1500); return; } const currentState = getCurrentDesignState(); redoStack.push(currentState); const previousState = historyStack.pop(); applyDesignState(previousState, true); updateStatus("Undo.", false, 1000); }
+            function redo() { if (redoStack.length === 0) { updateStatus("Nothing to redo.", false, 1500); return; } const currentState = getCurrentDesignState(); historyStack.push(currentState); const nextState = redoStack.pop(); applyDesignState(nextState, true); updateStatus("Redo.", false, 1000); }
+
+
+            // --- Drag and Drop Handlers --- >> MODIFIED BELOW << ---
+            function handleDragEnter(event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                const targetBox = event.target.closest('.bento-box:not(.placeholder)');
+                let newHighlightTarget = null;
+
+                if (targetBox) {
+                    newHighlightTarget = targetBox;
+                    targetBox.classList.add('drag-over-box');
+                } else if (event.target === bentoGridContainer) {
+                    newHighlightTarget = bentoGridContainer;
+                    bentoGridContainer.classList.add('drag-over-container');
+                } else {
+                     // If entering somewhere else within the container (like padding), maybe highlight container
+                     if (bentoGridContainer.contains(event.target)){
+                        newHighlightTarget = bentoGridContainer;
+                        bentoGridContainer.classList.add('drag-over-container');
+                     }
+                }
+
+                // Remove highlight from the previous element if it's different
+                if (currentlyHighlightedElement && currentlyHighlightedElement !== newHighlightTarget) {
+                    if (currentlyHighlightedElement.classList.contains('drag-over-box')) {
+                        currentlyHighlightedElement.classList.remove('drag-over-box');
+                    } else if (currentlyHighlightedElement.classList.contains('drag-over-container')) {
+                        currentlyHighlightedElement.classList.remove('drag-over-container');
+                    }
+                }
+                currentlyHighlightedElement = newHighlightTarget;
             }
 
+            function handleDragOver(event) {
+                // Necessary to allow dropping
+                event.preventDefault();
+                event.stopPropagation();
+                 // You could potentially re-trigger handleDragEnter logic here if needed
+                 // for complex cases, but let's keep it simple for now.
+            }
+
+            function handleDragLeave(event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                // Check if the mouse is leaving the grid container entirely
+                // event.relatedTarget is where the mouse is going. Can be null.
+                // event.currentTarget is the element the listener is attached to (bentoGridContainer)
+                if (event.relatedTarget === null || !event.currentTarget.contains(event.relatedTarget)) {
+                     // If leaving the main container boundary, clear all feedback
+                     clearDragFeedback();
+                }
+                // Avoid complex logic here; rely on dragenter on the *new* element
+                // and clearDragFeedback on drop/dragend/leaving the container.
+            }
+
+            function handleDrop(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                const targetBox = event.target.closest('.bento-box:not(.placeholder)');
+                const files = event.dataTransfer.files;
+
+                // Always clear feedback on successful drop or any drop attempt
+                clearDragFeedback();
+
+                if (files.length > 0) {
+                    const file = files[0];
+                    if (file.type.startsWith('image/')) {
+                        saveStateForUndo();
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            const dataURL = e.target.result; // This is the base64 data URI
+
+                            // Apply the image (as data URI)
+                            if (targetBox) {
+                                // Apply to specific box
+                                applyStyleToSelectedBoxes('backgroundImage', { value: { url: dataURL, action: 'apply' }, targetBox: targetBox });
+                                updateStatus('Image applied to box.', false);
+                                // Update panel if this box is being edited
+                                if (editingBox === targetBox) {
+                                     panelImageUrl.value = ''; // Clear URL input as data URI is applied
+                                     populatePanelWithBoxStyles(editingBox); // Re-populate to reflect change potentially
+                                }
+                            } else if (event.target === bentoGridContainer || bentoGridContainer.contains(event.target)) {
+                                // Apply to container background
+                                applyContainerBackground(dataURL, true);
+                                updateStatus('Image applied to container background.', false);
+                            }
+                            // NOTE: The dataURL is now stored in box.dataset.backgroundImage or globalSettings.explicitContainerImage
+                            // getCurrentDesignState already saves these, fulfilling the request to save the image source.
+                        };
+                        reader.onerror = () => {
+                            updateStatus('Error reading image file.', true);
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        updateStatus('Drop failed: File is not an image.', true);
+                    }
+                }
+            }
+
+            function clearDragFeedback() {
+                // Clear from the last known highlighted element
+                if (currentlyHighlightedElement) {
+                     if (currentlyHighlightedElement.classList.contains('drag-over-box')) {
+                        currentlyHighlightedElement.classList.remove('drag-over-box');
+                     } else if (currentlyHighlightedElement.classList.contains('drag-over-container')) {
+                        currentlyHighlightedElement.classList.remove('drag-over-container');
+                     }
+                }
+                 // Also do a general cleanup for safety, targeting the container directly
+                bentoGridContainer.classList.remove('drag-over-container');
+                // And cleanup any boxes just in case
+                const highlightedBoxes = bentoGridContainer.querySelectorAll('.drag-over-box');
+                highlightedBoxes.forEach(box => box.classList.remove('drag-over-box'));
+
+                // Reset state variable
+                currentlyHighlightedElement = null;
+            }
+            // --- Drag and Drop Handlers --- << END MODIFICATIONS >> ---
+
+             function downloadGridForWeb() {
+                 try {
+                     // 1. Get essential computed styles for the container
+                     const containerStyles = getComputedStyle(bentoGridContainer);
+                     const stylesToInclude = {
+                         'display': 'grid',
+                         'grid-template-columns': containerStyles.gridTemplateColumns,
+                         'grid-auto-rows': containerStyles.gridAutoRows,
+                         'gap': globalSettings.gap, // Use state value for accuracy
+                         'padding': globalSettings.outerPadding, // Use state value
+                         'border-radius': globalSettings.radius, // Use state value
+                         'background-color': globalSettings.explicitContainerBg || 'transparent',
+                         'background-image': globalSettings.explicitContainerImage ? `url(${globalSettings.explicitContainerImage})` : 'none',
+                         'background-size': 'cover',
+                         'background-position': 'center',
+                         'min-height': '100px' // Basic minimum height
+                     };
+                     const containerInlineStyle = Object.entries(stylesToInclude).map(([prop, val]) => `${prop}: ${val};`).join(' ');
+
+                     // 2. Get inner HTML of boxes (excluding placeholder)
+                     let boxesHtml = '';
+                     Array.from(bentoGridContainer.children).forEach(child => {
+                         if (!child.classList.contains('placeholder')) {
+                             // Create a clone to avoid modifying the original (though outerHTML shouldn't)
+                             const clone = child.cloneNode(true);
+                             // Optional: Remove any editor-specific attributes/classes if needed
+                              clone.removeAttribute('data-id'); // Example
+                              clone.classList.remove('selected'); // Example
+                             boxesHtml += clone.outerHTML + '\n'; // Add newline for readability
+                         }
+                     });
+
+                     // 3. Define minimal required CSS
+                     const minimalCSS = `
+                         * { box-sizing: border-box; margin: 0; padding: 0; }
+                         body { font-family: ${getComputedStyle(document.body).fontFamily || 'sans-serif'}; }
+                         .bento-box {
+                             overflow: hidden;
+                             position: relative;
+                             display: flex;
+                             flex-direction: column;
+                             justify-content: flex-start;
+                             align-items: stretch;
+                             border-radius: ${globalSettings.radius}; /* Use global radius */
+                             box-shadow: ${globalSettings.shadow !== 'none' ? globalSettings.shadow : 'none'}; /* Include shadow if set */
+                             /* Inline styles handle specific background, border, size */
+                         }
+                         .content-wrapper {
+                             padding: 18px; /* Match default */
+                             flex-grow: 1;
+                             position: relative;
+                             z-index: 1;
+                             outline: none;
+                             overflow-wrap: break-word;
+                             word-break: break-word;
+                             min-height: 40px;
+                             line-height: 1.5;
+                         }
+                         .bento-box img.background-image {
+                             position: absolute;
+                             top: 0; left: 0;
+                             width: 100%; height: 100%;
+                             object-fit: cover;
+                             z-index: 0;
+                             pointer-events: none;
+                             opacity: 0.9; /* Match theme */
+                         }
+                     `;
+
+                     // 4. Construct final HTML
+                     const finalHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exported Bento Grid</title>
+  <style>
+    ${minimalCSS}
+    #exportedBentoGridContainer {
+        ${containerInlineStyle}
+    }
+  </style>
+</head>
+<body>
+  <div id="exportedBentoGridContainer">
+${boxesHtml}
+  </div>
+</body>
+</html>`;
+
+                     // 5. Trigger download
+                     const blob = new Blob([finalHtml], { type: 'text/html' });
+                     const url = URL.createObjectURL(blob);
+                     const a = document.createElement('a');
+                     a.href = url;
+                     a.download = `bento-grid-export.html`;
+                     document.body.appendChild(a);
+                     a.click();
+                     document.body.removeChild(a);
+                     URL.revokeObjectURL(url);
+                     updateStatus('Grid HTML downloaded!', false);
+
+                 } catch (error) {
+                     console.error("Download Error:", error);
+                     updateStatus(`Download Error: ${error.message}`, true);
+                 }
+             }
 
             // --- Initialization ---
             function initializeApp() {
                 applyInitialTheme();
 
-                // Link Sliders & Inputs (Global)
+                // Link Sliders & Inputs
                 linkSliderInput(gridGapSlider, gridGapInput, applyGlobalGap, false, true);
                 linkSliderInput(outerPaddingSlider, outerPaddingInput, applyGlobalPadding, false, true);
                 linkSliderInput(boxRadiusSlider, boxRadiusInput, applyGlobalRadius, false, true);
@@ -542,57 +634,67 @@
                 linkSliderInput(globalShadowSpread, globalShadowSpreadNum, applyGlobalShadow);
                 globalShadowColor.addEventListener('input', applyGlobalShadow);
                 linkSliderInput(globalShadowOpacity, globalShadowOpacity, applyGlobalShadow, true);
-
-                // Link Panel Border Width
                 linkSliderInput(panelBorderWidthSlider, panelBorderWidth, (value) => applyStyleToSelectedBoxes('borderWidth', value), false, true);
 
                 // --- Event Listeners ---
                 addBoxPlaceholder.addEventListener('click', addBox);
                 closePanelBtn.addEventListener('click', closeEditPanel);
                 panelOverlay.addEventListener('click', closeEditPanel);
-                panelDeleteBoxBtn.addEventListener('click', deleteSelectedBoxes);
+                panelDeleteBoxBtn.addEventListener('click', () => deleteSelectedBoxes(false));
                 panelResetBoxBtn.addEventListener('click', resetSelectedBoxStyles);
                 resetGridBtn.addEventListener('click', resetGrid);
-                settingsHeaderToggle.addEventListener('click', toggleSettingsVisibility); // Listener for collapse toggle
+                settingsHeaderToggle.addEventListener('click', toggleSettingsVisibility);
+                bentoGridContainer.addEventListener('click', (event) => { if (event.target === bentoGridContainer) { if (selectedBoxes.size > 0) { selectedBoxes.forEach(box => box.classList.remove('selected')); selectedBoxes.clear(); updateMultiSelectIndicator(); } } });
 
                 // Global Settings / Header Actions
-                containerBgColorInput.addEventListener('input', (e) => applyContainerBackground(e.target.value));
+                containerBgColorInput.addEventListener('input', (e) => applyContainerBackground(e.target.value, false));
                 darkModeToggle.addEventListener('click', toggleDarkMode);
                 saveBtn.addEventListener('click', saveDesignToLocalStorage);
                 loadBtn.addEventListener('click', loadDesignFromLocalStorage);
                 exportBtn.addEventListener('click', exportDesign);
                 importBtn.addEventListener('click', triggerImport);
                 importFile.addEventListener('change', importDesignFromFile);
+                downloadHtmlBtn.addEventListener('click', downloadGridForWeb);
                 globalRemoveShadowBtn.addEventListener('click', removeGlobalShadow);
 
-                // Panel Styling Listeners (Box BG logic updated)
-                panelBoxColor.addEventListener('input', (e) => { const newColor = e.target.value; lastUsedBoxColor = newColor; applyStyleToSelectedBoxes('backgroundColor', newColor); if(editingBox && selectedBoxes.has(editingBox)) panelImageUrl.value = ''; });
-                 panelApplyImageBtn.addEventListener('click', () => { const url = panelImageUrl.value.trim(); if (url) { applyStyleToSelectedBoxes('backgroundImage', { url: url, action: 'apply' }); if(editingBox && selectedBoxes.has(editingBox)) panelBoxColor.value = rgbToHex(getThemeDefaults().bg); } else { updateStatus("Enter image URL", true); } });
-                 panelRemoveImageBtn.addEventListener('click', () => { applyStyleToSelectedBoxes('backgroundImage', { action: 'remove' }); if(editingBox && selectedBoxes.has(editingBox)) panelImageUrl.value = ''; });
+                // Panel Styling Listeners
+                panelBoxColor.addEventListener('change', (e) => { const newColor = e.target.value; lastUsedBoxColor = newColor; applyStyleToSelectedBoxes('backgroundColor', newColor); if(editingBox && selectedBoxes.has(editingBox)) panelImageUrl.value = ''; });
+                panelApplyImageBtn.addEventListener('click', () => { const url = panelImageUrl.value.trim(); if (url) { applyStyleToSelectedBoxes('backgroundImage', { value: { url: url, action: 'apply' } }); if(editingBox && selectedBoxes.has(editingBox)) panelBoxColor.value = rgbToHex(getThemeDefaults().bg); } else { updateStatus("Enter image URL", true); } });
+                panelRemoveImageBtn.addEventListener('click', () => { applyStyleToSelectedBoxes('backgroundImage', { value: { action: 'remove' } }); if(editingBox && selectedBoxes.has(editingBox)) panelImageUrl.value = ''; });
+                panelTextColorInput.addEventListener('change', (e) => applyStyleToSelectedBoxes('text', { value: {property: 'color', value: e.target.value }}));
+                panelFontSizeInput.addEventListener('change', (e) => { const size = Math.max(1, parseInt(e.target.value, 10) || 15); applyStyleToSelectedBoxes('text', { value: { property: 'fontSize', value: size } }); });
+                panelBorderStyle.addEventListener('change', (e) => applyStyleToSelectedBoxes('borderStyle', e.target.value));
+                panelBorderColor.addEventListener('change', (e) => applyStyleToSelectedBoxes('borderColor', e.target.value));
+                panelTextBoldBtn.addEventListener('click', () => { saveStateForUndo(); formatText('bold'); });
+                panelTextItalicBtn.addEventListener('click', () => { saveStateForUndo(); formatText('italic'); });
+                panelTextUnderlineBtn.addEventListener('click', () => { saveStateForUndo(); formatText('underline'); });
+                panelTextAlignLeftBtn.addEventListener('click', () => applyStyleToSelectedBoxes('text', { value: {property: 'textAlign', value: 'left'}}));
+                panelTextAlignCenterBtn.addEventListener('click', () => applyStyleToSelectedBoxes('text', { value: {property: 'textAlign', value: 'center'}}));
+                panelTextAlignRightBtn.addEventListener('click', () => applyStyleToSelectedBoxes('text', { value: {property: 'textAlign', value: 'right'}}));
+                panelTextAlignJustifyBtn.addEventListener('click', () => applyStyleToSelectedBoxes('text', { value: {property: 'textAlign', value: 'justify'}}));
+                panelWidthMinusBtn.addEventListener('click', () => resizeSelectedBoxes('width', -1));
+                panelWidthPlusBtn.addEventListener('click', () => resizeSelectedBoxes('width', 1));
+                panelHeightMinusBtn.addEventListener('click', () => resizeSelectedBoxes('height', -1));
+                panelHeightPlusBtn.addEventListener('click', () => resizeSelectedBoxes('height', 1));
 
-                // Other Panel Listeners (Text, Border, Size)
-                panelTextColorInput.addEventListener('input', (e) => applyStyleToSelectedBoxes('text', {property: 'color', value: e.target.value}));
-                panelFontSizeInput.addEventListener('input', (e) => { const size = Math.max(1, parseInt(e.target.value, 10) || 15); applyStyleToSelectedBoxes('text', { property: 'fontSize', value: size }); });
-                panelTextBoldBtn.addEventListener('click', () => formatText('bold')); panelTextItalicBtn.addEventListener('click', () => formatText('italic')); panelTextUnderlineBtn.addEventListener('click', () => formatText('underline'));
-                panelTextAlignLeftBtn.addEventListener('click', () => applyStyleToSelectedBoxes('text', {property: 'textAlign', value: 'left'})); panelTextAlignCenterBtn.addEventListener('click', () => applyStyleToSelectedBoxes('text', {property: 'textAlign', value: 'center'})); panelTextAlignRightBtn.addEventListener('click', () => applyStyleToSelectedBoxes('text', {property: 'textAlign', value: 'right'})); panelTextAlignJustifyBtn.addEventListener('click', () => applyStyleToSelectedBoxes('text', {property: 'textAlign', value: 'justify'}));
-                panelBorderStyle.addEventListener('input', (e) => applyStyleToSelectedBoxes('borderStyle', e.target.value)); panelBorderColor.addEventListener('input', (e) => applyStyleToSelectedBoxes('borderColor', e.target.value));
-                panelWidthMinusBtn.addEventListener('click', () => resizeSelectedBoxes('width', -1)); panelWidthPlusBtn.addEventListener('click', () => resizeSelectedBoxes('width', 1)); panelHeightMinusBtn.addEventListener('click', () => resizeSelectedBoxes('height', -1)); panelHeightPlusBtn.addEventListener('click', () => resizeSelectedBoxes('height', 1));
+                 // Global Keyboard Listener
+                 document.addEventListener('keydown', (event) => { const activeElement = document.activeElement; const isEditing = activeElement && (activeElement.isContentEditable || activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA' || activeElement.tagName === 'SELECT'); const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0; const modifierKey = isMac ? event.metaKey : event.ctrlKey; if (modifierKey && event.key.toLowerCase() === 's') { event.preventDefault(); if (!isEditing) { saveDesignToLocalStorage(); updateStatus("Saved (Browser)", false, 1000); } } else if (modifierKey && (event.key === 'Delete' || event.key === 'Backspace')) { if (!isEditing && selectedBoxes.size > 0) { event.preventDefault(); deleteSelectedBoxes(true); } } else if (modifierKey && !event.shiftKey && event.key.toLowerCase() === 'z') { if (!isEditing) { event.preventDefault(); undo(); } } else if (modifierKey && (event.key.toLowerCase() === 'y' || (event.shiftKey && event.key.toLowerCase() === 'z'))) { if (!isEditing) { event.preventDefault(); redo(); } } });
 
-                // Initialize SortableJS
-                 sortableInstance = new Sortable(bentoGridContainer, { animation: 150, handle: '.bento-box', draggable: '.bento-box:not(.placeholder)', filter: '.placeholder, .content-wrapper', preventOnFilter: false, ghostClass: 'sortable-ghost', chosenClass: 'sortable-chosen', onEnd: function(evt) { /* Auto-save? */ } });
+                 // Drag and Drop Listeners (using MODIFIED handlers)
+                 bentoGridContainer.addEventListener('dragenter', handleDragEnter, false);
+                 bentoGridContainer.addEventListener('dragover', handleDragOver, false);
+                 bentoGridContainer.addEventListener('dragleave', handleDragLeave, false);
+                 bentoGridContainer.addEventListener('drop', handleDrop, false);
+                 document.addEventListener('dragend', clearDragFeedback, false); // Add cleanup on drag end
+                 window.addEventListener('blur', clearDragFeedback, false); // Add cleanup if window loses focus during drag
+
+                 // Initialize SortableJS
+                  sortableInstance = new Sortable(bentoGridContainer, { animation: 150, handle: '.bento-box', draggable: '.bento-box:not(.placeholder)', filter: '.placeholder, .content-wrapper', preventOnFilter: false, ghostClass: 'sortable-ghost', chosenClass: 'sortable-chosen', onEnd: function(evt) { if (evt.oldIndex !== evt.newIndex) { if (!isUndoingOrRedoing) saveStateForUndo(); } } });
 
                  // --- Initial Load / Defaults ---
-                 if (!loadDesignFromLocalStorage()) {
-                    globalSettings = { ...initialDefaults };
-                    applyGlobalGap(parseInt(globalSettings.gap)); gridGapInput.value = parseInt(globalSettings.gap); gridGapSlider.value = parseInt(globalSettings.gap);
-                    applyGlobalPadding(parseInt(globalSettings.outerPadding)); outerPaddingInput.value = parseInt(globalSettings.outerPadding); outerPaddingSlider.value = parseInt(globalSettings.outerPadding);
-                    applyGlobalRadius(parseInt(globalSettings.radius)); boxRadiusInput.value = parseInt(globalSettings.radius); boxRadiusSlider.value = parseInt(globalSettings.radius);
-                    removeGlobalShadow();
-                    const isDark = document.body.classList.contains('dark-mode'); const initialBg = 'transparent'; globalSettings.explicitContainerBg = null; updateCssVariable('--grid-background-color', initialBg); containerBgColorInput.value = rgbToHex(initialBg);
-                 }
-                 updateMultiSelectIndicator(); // Initial button states
-                 // Optionally start with settings collapsed
-                 // toggleSettingsVisibility(); // Call once to collapse initially
+                 if (!loadDesignFromLocalStorage()) { globalSettings = { ...initialDefaults }; applyGlobalGap(parseInt(globalSettings.gap)); gridGapInput.value = parseInt(globalSettings.gap); gridGapSlider.value = parseInt(globalSettings.gap); applyGlobalPadding(parseInt(globalSettings.outerPadding)); outerPaddingInput.value = parseInt(globalSettings.outerPadding); outerPaddingSlider.value = parseInt(globalSettings.outerPadding); applyGlobalRadius(parseInt(globalSettings.radius)); boxRadiusInput.value = parseInt(globalSettings.radius); boxRadiusSlider.value = parseInt(globalSettings.radius); removeGlobalShadow(); const isDark = document.body.classList.contains('dark-mode'); const initialBg = 'transparent'; globalSettings.explicitContainerBg = null; updateCssVariable('--grid-background-color', initialBg); containerBgColorInput.value = rgbToHex(initialBg); }
+                 updateMultiSelectIndicator();
+                 saveStateForUndo(); // Save initial state
             }
 
             initializeApp(); // Start the application
