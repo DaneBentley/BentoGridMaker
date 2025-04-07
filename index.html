@@ -11,16 +11,16 @@
             --font-primary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             --header-height: 65px;
             --panel-width: 320px;
-            --glass-blur: 20px;
+            --glass-blur: 15px;
             --glass-border-width: 1px;
-            --glass-bg-light: rgba(255, 255, 255, 0.6);
-            --glass-border-light: rgba(255, 255, 255, 0.8);
-            --glass-bg-dark: rgba(30, 30, 30, 0.65);
-            --glass-border-dark: rgba(255, 255, 255, 0.1);
-            --bg-primary-gradient: linear-gradient(135deg, #ece9e6 0%, #ffffff 100%);
+            --glass-bg-light: rgba(255, 255, 255, 0.3);
+            --glass-border-light: rgba(255, 255, 255, 0.6);
+            --glass-bg-dark: rgba(30, 30, 30, 0.5);
+            --glass-border-dark: rgba(255, 255, 255, 0.2);
+            --bg-primary-gradient: linear-gradient(135deg, #AAC0E4 0%, #E5BDD2 50%, #FADEBA 100%);
             --bg-glass: var(--glass-bg-light);
             --glass-border-color: var(--glass-border-light);
-            --bg-input: rgba(255, 255, 255, 0.7);
+            --bg-input: rgba(255, 255, 255, 0.4);
             --border-color: rgba(0, 0, 0, 0.1);
             --text-primary: #1a1a1a;
             --text-secondary: #555555;
@@ -35,9 +35,9 @@
             --selected-outline-color: var(--accent-primary);
             --slider-track: rgba(0, 0, 0, 0.1);
             --slider-thumb: var(--accent-primary);
-            --status-success-bg: rgba(209, 231, 221, 0.9);
+            --status-success-bg: rgba(222, 253, 238, 0.4);
             --status-success-text: #0f5132;
-            --status-error-bg: rgba(248, 215, 218, 0.9);
+            --status-error-bg: rgba(255, 192, 197, 0.4);
             --status-error-text: #842029;
             --box-bg-default: var(--bg-glass);
             --box-border-default: var(--glass-border-color);
@@ -47,6 +47,16 @@
             --grid-padding: 15px;
             --grid-outer-padding: 20px;
             --box-border-radius: 12px;
+
+    /* === ADDED Animation Variables === */
+    --animation-timing-snappy: cubic-bezier(0.075, 0.82, 0.165, 1);
+    --animation-duration-standard: 0.25s; /* Adjust duration if needed */
+    --animation-duration-fast: 0.15s;
+    --animation-duration-long: 0.4s; /* For larger movements like panel/settings */
+    /* === END Animation Variables === */
+
+            --box-border-radius-double: calc(var(--box-border-radius) * 2);
+            
             --grid-background-color: transparent;
             --box-shadow-global: none;
             --grid-container-explicit-bg: null;
@@ -69,7 +79,7 @@
             --selected-outline-color: var(--accent-primary);
             --slider-track: rgba(255, 255, 255, 0.15);
             --slider-thumb: var(--accent-primary);
-            --status-success-bg: rgba(15, 81, 50, 0.9);
+            --status-success-bg: rgba(108, 249, 183, 0.2);
             --status-success-text: #d1e7dd;
             --status-error-bg: rgba(132, 32, 41, 0.9);
             --status-error-text: #f8d7da;
@@ -81,6 +91,7 @@
             --grid-background-color: var(--grid-container-explicit-bg, transparent);
             --box-shadow-global: none;
             --accent-primary-rgb: 59, 138, 255;
+            
         }
         /* Base Styles */
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -92,7 +103,7 @@
         .header-title { font-size: 1.4em; font-weight: 600; color: var(--text-primary); }
         .header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
         .app-content { flex-grow: 1; display: flex; flex-direction: column; padding: 25px; gap: 25px; }
-        .global-settings { composes: glass-effect; background: var(--bg-glass); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border: var(--glass-border-width) solid var(--glass-border-color); box-shadow: var(--shadow-md); border-radius: var(--box-border-radius); padding: 0; display: flex; flex-wrap: wrap; align-items: flex-start; transition: background 0.3s; overflow: hidden; }
+        .global-settings { composes: glass-effect; background: var(--bg-glass); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border: var(--glass-border-width) solid var(--glass-border-color); box-shadow: var(--shadow-md); border-radius: var(--box-border-radius-double); padding: 0; display: flex; flex-wrap: wrap; align-items: flex-start; transition: background 0.3s; overflow: hidden; }
         .settings-header { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 15px 25px; border-bottom: 1px solid var(--glass-border-color); cursor: pointer; }
         .settings-header h2 { margin-bottom: 0; font-size: 1.15em; font-weight: 600; color: var(--text-primary); padding-bottom: 0; border-bottom: none; }
          #toggleSettingsBtn { background: none; border: none; color: var(--text-secondary); font-size: 1.5em; line-height: 1; padding: 0 5px; cursor: pointer; transition: cubic-bezier(0.075, 0.82, 0.165, 1); }
@@ -118,16 +129,16 @@
         .gcontainer { display: flex; align-items: center; gap: 10px; }
         .gcontainer-style { display: flex; flex-direction: column; gap: 20px; }
         .gcontainer-style > h4 { font-weight: 600; font-size: 1em; color: var(--text-primary); margin-bottom: -5px; }
-        .slider-container input[type="range"] { flex-grow: 1; cursor: pointer; appearance: none; height: 8px; background: var(--slider-track); border-radius: 4px; outline: none; transition:cubic-bezier(0.075, 0.82, 0.165, 1); }
-        .slider-container input[type="range"]::-webkit-slider-thumb { appearance: none; width: 18px; height: 18px; background: var(--slider-thumb); border-radius: 50%; cursor: pointer; border: none; transition: cubic-bezier(0.075, 0.82, 0.165, 1); }
-        .slider-container input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; background: var(--slider-thumb); border-radius: 50%; cursor: pointer; border: none; transition: cubic-bezier(0.075, 0.82, 0.165, 1); }
+        .slider-container input[type="range"] { flex-grow: 1; cursor: pointer; appearance: none; height: 8px; background: var(--slider-track); border-radius: 4px; outline: none; transition: background var(--animation-duration-fast) var(--animation-timing-snappy), box-shadow var(--animation-duration-fast) var(--animation-timing-snappy); }
+        .slider-container input[type="range"]::-webkit-slider-thumb { appearance: none; width: 18px; height: 18px; background: var(--slider-thumb); border-radius: 50%; cursor: pointer; border: none; transition: background var(--animation-duration-fast) var(--animation-timing-snappy), box-shadow var(--animation-duration-fast) var(--animation-timing-snappy); }
+        .slider-container input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; background: var(--slider-thumb); border-radius: 50%; cursor: pointer; border: none; transition: background var(--animation-duration-fast) var(--animation-timing-snappy), box-shadow var(--animation-duration-fast) var(--animation-timing-snappy); }
         .slider-container input[type="number"] { width: 70px; flex-shrink: 0; }
         button { padding: 10px 18px; border-radius: 8px; font-size: 0.95em; background-color: var(--accent-primary); color: #fff; border: none; cursor: pointer; transition: background-color 0.2s ease, opacity 0.2s ease; white-space: nowrap; font-weight: 500; }
         button:hover:not(:disabled) { background-color: var(--accent-primary-hover); }
         button:disabled { opacity: 0.6; cursor: not-allowed; }
-        .secondary-button { background-color: rgb(207 209 210 / 70%); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.1); }
+        .secondary-button { background-color: rgba(0, 0, 0, 0.2); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.1); }
         body.light-mode .secondary-button { background-color: rgba(230, 230, 230, 0.7); border: 1px solid rgba(0,0,0,0.08); }
-        .secondary-button:hover:not(:disabled) { background-color: rgba(140, 145, 149, 0.9); }
+        .secondary-button:hover:not(:disabled) { background-color: rgba(0, 0, 0, 0.1);}
         body.light-mode .secondary-button:hover:not(:disabled) { background-color: rgba(210, 210, 210, 0.9); }
         .danger-button { flex: 1; background-color: rgba(220, 53, 69, 0.8); border: none; color: #fff; }
         .danger-button:hover:not(:disabled) { background-color: rgba(220, 53, 69, 1); }
@@ -136,8 +147,13 @@
         .icon-button { padding: 6px 8px; line-height: 1; }
         .control-button-group { display: flex; gap: 5px; }
         .control-button-group button { flex: 1; min-width: 40px; text-align: center; }
-        #bentoGridContainer { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); grid-auto-rows: minmax(130px, auto); gap: var(--grid-padding); padding: var(--grid-outer-padding); background-color: var(--grid-background-color); border-radius: var(--box-border-radius); min-height: 400px; flex-grow: 1; border: none; transition: gap 0.3s, padding 0.3s, background-color 0.3s; background-size: cover; background-position: center; }
-        .bento-box { composes: glass-effect; background: var(--box-bg-default); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border: var(--glass-border-width) solid var(--box-border-default); box-shadow: var(--box-shadow-global); border-radius: var(--box-border-radius); overflow: hidden; position: relative; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; cursor: grab; transition: all 0.25s ease; color: var(--box-text-default); grid-column-end: span 1; grid-row-end: span 1; }
+        #bentoGridContainer { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); grid-auto-rows: minmax(130px, auto); gap: var(--grid-padding); padding: var(--grid-outer-padding); background-color: var(--grid-background-color); border-radius: var(--box-border-radius-double); min-height: 400px; flex-grow: 1; border: none; transition: gap var(--animation-duration-standard) var(--animation-timing-snappy),
+                padding var(--animation-duration-standard) var(--animation-timing-snappy),
+                background-color var(--animation-duration-standard) var(--animation-timing-snappy),
+                background-image var(--animation-duration-standard) var(--animation-timing-snappy);
+ background-size: cover; background-position: center; }
+        .bento-box { composes: glass-effect; background: var(--box-bg-default); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border: var(--glass-border-width) solid var(--box-border-default); box-shadow: var(--box-shadow-global); border-radius: var(--box-border-radius); overflow: hidden; position: relative; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; cursor: grab; transition: all var(--animation-duration-standard) var(--animation-timing-snappy);
+            ; color: var(--box-text-default); grid-column-end: span 1; grid-row-end: span 1; }
         .bento-box.selected { outline: 3px solid var(--selected-outline-color); outline-offset: 2px; box-shadow: 0 0 0 3px var(--selected-outline-color); }
         .content-wrapper { padding: 18px; flex-grow: 1; position: relative; z-index: 1; outline: none; overflow-wrap: break-word; word-break: break-word; min-height: 40px; line-height: 1.5; }
          /* *** Hide empty placeholder when box has image *** */
@@ -177,6 +193,23 @@
         .sortable-chosen { box-shadow: var(--shadow-md); transform: scale(1.03); }
         .drag-over-box { outline: 3px dashed var(--accent-primary) !important; /* Use !important maybe needed */ outline-offset: 3px; background-color: rgba(var(--accent-primary-rgb), 0.1) !important; }
         .drag-over-container { outline: 3px dashed var(--accent-secondary) !important; /* Use !important maybe needed */ outline-offset: -3px; background-color: rgba(108, 117, 125, 0.1) !important; }
+       /* --- Logo Styles --- */
+        .header-title { display: flex; /* Arrange logo and text side-by-side */ align-items: center; /* Vertically center logo and text */ gap: 10px; /* Space between logo and text */}
+        .header-logo {    height: 80px; /* Adjust the height as needed */ width: auto;  /* Maintain aspect ratio */  }
+        .logo-dark {  display: none; }
+        .logo-light {  display: inline-block; /* Or block */   }
+         body.dark-mode .logo-light {
+        display: none;
+    }
+    body.dark-mode .logo-dark {
+        display: inline-block; /* Or block */
+    }
+
+    /* Optional: Style for the text if needed */
+    .title-text {
+   /* Add specific styles if you want */
+    }
+    /* --- End Logo Styles --- */
         @media (max-width: 900px) { #globalSettingsContent { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); } }
         @media (max-width: 768px) { .app-header { padding: 0 15px; height: auto; flex-direction: column; align-items: flex-start; padding-top: 10px; padding-bottom: 10px; gap: 10px; backdrop-filter: none; } .app-content { padding: 20px; gap: 20px; } .global-settings { padding: 0; } .settings-header { padding: 15px 20px; } #globalSettingsContent { padding: 15px 20px; grid-template-columns: 1fr; } #bentoGridContainer { padding: 15px; } }
         @media (max-width: 480px) { .header-actions { width: 100%; justify-content: space-around; } #bentoGridContainer { padding: 10px; gap: 10px; } .content-wrapper { padding: 15px; } .panel-footer { flex-direction: column; } .app-header { padding: 10px 15px; } .app-content { padding: 15px; gap: 15px; } }
@@ -185,14 +218,18 @@
 <body>
     <div class="app-wrapper">
         <header class="app-header">
-            <div class="header-title">Bento Grid Maker</div>
+            <div class="header-title">
+                <img src="LogoLight.svg" alt="Logo" class="header-logo logo-light">
+                <img src="LogoDark.svg" alt="Logo" class="header-logo logo-dark">
+                <span class="title-text">Bento Grid Maker</span>
+                </div>
             <div class="header-actions">
                 <button id="saveBtn" class="secondary-button small-button" title="Save to Browser">Save</button>
                 <button id="loadBtn" class="secondary-button small-button" title="Load from Browser">Load</button>
                 <button id="exportBtn" class="secondary-button small-button" title="Export Design to File">Export</button>
                 <button id="importBtn" class="secondary-button small-button" title="Import Design from File">Import</button>
                 <input type="file" id="importFile" accept=".json" style="display: none;">
-                 <button id="downloadHtmlBtn" class="secondary-button small-button" title="Download Grid HTML">DL HTML</button>
+                <button id="downloadHtmlBtn" class="secondary-button small-button" title="Download Grid HTML">DL HTML</button>
                 <button id="darkModeToggle" class="secondary-button small-button">Theme</button>
             </div>
         </header>
@@ -204,7 +241,7 @@
                      <button id="toggleSettingsBtn" class="icon-button small-button" title="Toggle Settings">&#x25BC;</button>
                  </div>
                  <div id="globalSettingsContent">
-                     <div class="settings-column"> <h4>Layout</h4> <div class="setting-group"> <label for="gridGapInput">Box Spacing (px)</label> <div class="slider-container"> <input type="range" id="gridGapSlider" min="0" max="50" value="15"> <input type="number" id="gridGapInput" step="1" value="15"> </div> </div> <div class="setting-group"> <label for="outerPaddingInput">Outer Padding (px)</label> <div class="slider-container"> <input type="range" id="outerPaddingSlider" min="0" max="100" value="20"> <input type="number" id="outerPaddingInput" step="1" value="20"> </div> </div> <div class="setting-group"> <label for="boxRadiusInput">Corner Radius (px)</label> <div class="slider-container"> <input type="range" id="boxRadiusSlider" min="0" max="50" value="12"> <input type="number" id="boxRadiusInput" step="1" value="12"> </div> </div> <div class="slider-container"> <label for="containerBgColorInput"> Container Background</label> <input type="color" style="width:40px;" id="containerBgColorInput" value="#ffffff"> </div> </div>
+                     <div class="settings-column"> <h4>Layout</h4> <div class="setting-group"> <label for="gridGapInput">Box Spacing (px)</label> <div class="slider-container"> <input type="range" id="gridGapSlider" min="0" max="50" value="15"> <input type="number" id="gridGapInput" step="1" value="15"> </div> </div> <div class="setting-group"> <label for="outerPaddingInput">Outer Padding (px)</label> <div class="slider-container"> <input type="range" id="outerPaddingSlider" min="0" max="100" value="20"> <input type="number" id="outerPaddingInput" step="1" value="20"> </div> </div> <div class="setting-group"> <label for="boxRadiusInput">Corner Radius (px)</label> <div class="slider-container"> <input type="range" id="boxRadiusSlider" min="0" max="50" value="12"> <input type="number" id="boxRadiusInput" step="1" value="12"> </div> </div> <div class="slider-container"> <label for="containerBgColorInput"> Container Background</label> <input type="color" style="width:40px;" id="containerBgColorInput" value="#ffffff 0.5%"> <button id="resetBgBtn" class="small-button secondary-button" style="margin-top: 5px;">Remove Background</button> </div> </div>
                      <div class="settings-column"> <div class="setting-group"> <h4>Global Box Shadow</h4> <div class="slider-container"> <label for="global-shadowX" style="width: 20px;" title="Horizontal Offset">X:</label> <input type="range" id="global-shadowX" min="-20" max="20" value="0"> <input type="number" id="global-shadowXNum" step="1" value="0" style="width: 60px;"> </div> <div class="slider-container"> <label for="global-shadowY" style="width: 20px;" title="Vertical Offset">Y:</label> <input type="range" id="global-shadowY" min="-20" max="20" value="0"> <input type="number" id="global-shadowYNum" step="1" value="0" style="width: 60px;"> </div> <div class="slider-container"> <label for="global-shadowBlur" style="width: 35px;" title="Blur Radius">Blur:</label> <input type="range" id="global-shadowBlur" min="0" max="40" value="0"> <input type="number" id="global-shadowBlurNum" step="1" value="0" style="width: 60px;"> </div> <div class="slider-container"> <label for="global-shadowSpread" style="width: 45px;" title="Spread Radius">Spread:</label> <input type="range" id="global-shadowSpread" min="-20" max="20" value="0"> <input type="number" id="global-shadowSpreadNum" step="1" value="0" style="width: 60px;"> </div> <div class="slider-container"> <label for="global-shadowColor" style="width: 45px;" title="Shadow Color">Color:</label> <input type="color" style="width: 40px;" id="global-shadowColor" value="#000000"> <input type="range" id="global-shadowOpacity" min="0" max="1" step="0.01" value="0.00" title="Opacity"> </div> <button id="global-removeShadowBtn" class="small-button secondary-button" style="margin-top: 5px;">Remove Shadow</button>  </div> </div>
                      <div class="settings-column tips-column"> <div class="tips-section"> <h4> Tips</h4> <ul> <li><strong>Double-click</strong> an item to open the edit panel.</li>  <li>Click and drag on <strong>box border</strong> to rearrange.</li><li>Hold <code>Ctrl</code> / <code>Cmd</code> and click items to <strong>select multiple</strong>.</li> <li><code>Cmd/Ctrl + S</code> to <strong>Save</strong> (browser).</li><li><code>Cmd/Ctrl + Delete</code> to <strong>Delete</strong> selected.</li><li>Use <strong>Export/Import</strong> to save/load designs to your computer.</li>  <li>Use <strong>DL HTML</strong> to download your bento code!</li><div>  <button id="resetGridBtn" class="danger-button">RESET ALL</button> </div></ul> </div> </div>
                      
@@ -217,7 +254,7 @@
 
         <aside id="editPanel" class="edit-panel">
              <div class="panel-header"> <h3>Edit Box <span id="multiSelectIndicator">(Multiple)</span></h3> <button id="closePanelBtn" title="Close Panel">&times;</button> </div>
-             <div class="panel-content"> <section class="panel-section"> <section class="panel-section"> <h4>Size (Grid Span)</h4> <div class="setting-group"> <label>Width Span</label> <div class="control-button-group"> <button id="panel-widthMinusBtn" class="small-button secondary-button icon-button">-</button> <span id="panel-widthDisplay" class="size-display" style="text-align: center; padding: 5px 10px; border: 1px solid var(--border-color); border-radius: 6px; min-width: 40px; background: var(--bg-input);">1</span> <button id="panel-widthPlusBtn" class="small-button secondary-button icon-button">+</button> </div> </div> <div class="setting-group"> <label>Height Span</label> <div class="control-button-group"> <button id="panel-heightMinusBtn" class="small-button secondary-button icon-button">-</button> <span id="panel-heightDisplay" class="size-display" style="text-align: center; padding: 5px 10px; border: 1px solid var(--border-color); border-radius: 6px; min-width: 40px; background: var(--bg-input);">1</span> <button id="panel-heightPlusBtn" class="small-button secondary-button icon-button">+</button> </div> </div> </section><h4>Background</h4> <div class=".gcontainer"> <label for="panel-boxColor">Color</label> <input type="color" id="panel-boxColor" style="width: 40px;" value="#ffffff"> </div> <div class="setting-group"> <label for="panel-imageUrl">Image URL</label> <input type="text" id="panel-imageUrl" placeholder="https://..."> </div> <div class="button-group"> <button id="panel-applyImageBtn" class="small-button">Apply Image</button> <button id="panel-removeImageBtn" class="small-button secondary-button">Remove Image</button> </div> <small>Setting color removes image.</small> </section> <section class="panel-section"> <h4>Text</h4> <div class="setting-group"> <label for="panel-textColorInput">Color</label> <input type="color" id="panel-textColorInput" value="#333333"> </div> <div class="setting-group"> <label for="panel-fontSizeInput">Font Size (px)</label> <input type="number" id="panel-fontSizeInput" step="1" value="15"> </div> <div class="setting-group"> <label>Format</label> <div class="control-button-group"> <button id="panel-textBoldBtn" class="small-button secondary-button icon-button" title="Bold"><b>B</b></button> <button id="panel-textItalicBtn" class="small-button secondary-button icon-button" title="Italic"><i>I</i></button> <button id="panel-textUnderlineBtn" class="small-button secondary-button icon-button" title="Underline"><u>U</u></button> </div> </div> <div class="setting-group"> <label>Alignment</label> <div class="control-button-group"> <button id="panel-textAlignLeftBtn" class="small-button secondary-button icon-button" title="Align Left">L</button> <button id="panel-textAlignCenterBtn" class="small-button secondary-button icon-button" title="Align Center">C</button> <button id="panel-textAlignRightBtn" class="small-button secondary-button icon-button" title="Align Right">R</button> <button id="panel-textAlignJustifyBtn" class="small-button secondary-button icon-button" title="Justify">J</button> </div> </div> </section> <section class="panel-section"> <h4>Border</h4> <div class="setting-group"> <label for="panel-borderWidth">Width (px)</label> <div class="slider-container"> <input type="range" id="panel-borderWidthSlider" min="0" max="20" value="1"> <input type="number" id="panel-borderWidth" step="1" value="1"> </div> </div> <div class="setting-group"> <label for="panel-borderStyle">Style</label> <select id="panel-borderStyle"> <option value="none">None</option> <option value="solid" selected>Solid</option> <option value="dashed">Dashed</option> <option value="dotted">Dotted</option> </select> </div> <div class="setting-group"> <label for="panel-borderColor">Color</label> <input type="color" id="panel-borderColor" value="#ffffff">  </div> </section>  </div>
+             <div class="panel-content"> <section class="panel-section"> <section class="panel-section"> <h4>Size (Grid Span)</h4> <div class="setting-group"> <label>Width Span</label> <div class="control-button-group"> <button id="panel-widthMinusBtn" class="small-button secondary-button icon-button">-</button> <span id="panel-widthDisplay" class="size-display" style="text-align: center; padding: 5px 10px; border: 1px solid var(--border-color); border-radius: 6px; min-width: 40px; background: var(--bg-input);">1</span> <button id="panel-widthPlusBtn" class="small-button secondary-button icon-button">+</button> </div> </div> <div class="setting-group"> <label>Height Span</label> <div class="control-button-group"> <button id="panel-heightMinusBtn" class="small-button secondary-button icon-button">-</button> <span id="panel-heightDisplay" class="size-display" style="text-align: center; padding: 5px 10px; border: 1px solid var(--border-color); border-radius: 6px; min-width: 40px; background: var(--bg-input);">1</span> <button id="panel-heightPlusBtn" class="small-button secondary-button icon-button">+</button> </div> </div> </section><h4>Background</h4> <div class="slider-container"> <label for="panel-boxColor">Color</label> <input type="color" id="panel-boxColor" style="width: 40px;" value="#ffffff"> </div> <div class="setting-group"> <label for="panel-imageUrl">Image URL</label> <input type="text" id="panel-imageUrl" placeholder="https://..."> </div> <div class="button-group"> <button id="panel-applyImageBtn" class="small-button">Apply Image</button> <button id="panel-removeImageBtn" class="small-button secondary-button">Remove Image</button> </div> <small>Setting color removes image.</small> </section> <section class="panel-section"> <h4>Text</h4> <div class="setting-group"> <label for="panel-textColorInput">Color</label> <input type="color" id="panel-textColorInput" value="#333333"> </div> <div class="setting-group"> <label for="panel-fontSizeInput">Font Size (px)</label> <input type="number" id="panel-fontSizeInput" step="1" value="15"> </div> <div class="setting-group"> <label>Format</label> <div class="control-button-group"> <button id="panel-textBoldBtn" class="small-button secondary-button icon-button" title="Bold"><b>B</b></button> <button id="panel-textItalicBtn" class="small-button secondary-button icon-button" title="Italic"><i>I</i></button> <button id="panel-textUnderlineBtn" class="small-button secondary-button icon-button" title="Underline"><u>U</u></button> </div> </div> <div class="setting-group"> <label>Alignment</label> <div class="control-button-group"> <button id="panel-textAlignLeftBtn" class="small-button secondary-button icon-button" title="Align Left">L</button> <button id="panel-textAlignCenterBtn" class="small-button secondary-button icon-button" title="Align Center">C</button> <button id="panel-textAlignRightBtn" class="small-button secondary-button icon-button" title="Align Right">R</button> <button id="panel-textAlignJustifyBtn" class="small-button secondary-button icon-button" title="Justify">J</button> </div> </div> </section> <section class="panel-section"> <h4>Border</h4> <div class="setting-group"> <label for="panel-borderWidth">Width (px)</label> <div class="slider-container"> <input type="range" id="panel-borderWidthSlider" min="0" max="20" value="1"> <input type="number" id="panel-borderWidth" step="1" value="1"> </div> </div> <div class="setting-group"> <label for="panel-borderStyle">Style</label> <select id="panel-borderStyle"> <option value="none">None</option> <option value="solid" selected>Solid</option> <option value="dashed">Dashed</option> <option value="dotted">Dotted</option> </select> </div> <div class="setting-group"> <label for="panel-borderColor">Color</label> <input type="color" id="panel-borderColor" value="#ffffff">  </div> </section>  </div>
              <div class="panel-footer"> <button id="panel-resetBoxBtn" class="secondary-button">Reset Styles</button> <button id="panel-deleteBoxBtn" class="danger-button">Delete</button> </div>
         </aside>
 
@@ -229,6 +266,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             // --- DOM References ---
             const resetGridBtn = document.getElementById('resetGridBtn');
+            const resetBgBtn = document.getElementById('resetBgBtn');
             const bentoGridContainer = document.getElementById('bentoGridContainer');
             const addBoxPlaceholder = document.getElementById('add-box-placeholder');
             const editPanel = document.getElementById('editPanel');
@@ -293,7 +331,7 @@
 
             // --- State Variables ---
             let editingBox = null; let selectedBoxes = new Set(); let sortableInstance = null; let statusTimeout = null; let lastUsedBoxColor = null;
-            const initialDefaults = { gap: '15px', outerPadding: '20px', radius: '12px', containerBg: 'transparent', explicitContainerBg: null, explicitContainerImage: null, shadow: 'none' };
+            const initialDefaults = { gap: '15px', outerPadding: '20px', radius: '21px', containerBg: 'transparent', explicitContainerBg: null, explicitContainerImage: null, shadow: 'none' };
             let globalSettings = { ...initialDefaults };
             const historyStack = []; const redoStack = []; const MAX_HISTORY = 30; let isUndoingOrRedoing = false;
             let currentlyHighlightedElement = null; // *** ADDED for drag/drop state ***
@@ -389,6 +427,9 @@
             function saveStateForUndo() { if (isUndoingOrRedoing) return; const currentState = getCurrentDesignState(); if (historyStack.length > 0 && JSON.stringify(currentState) === JSON.stringify(historyStack[historyStack.length - 1])) { return; } historyStack.push(currentState); redoStack.length = 0; if (historyStack.length > MAX_HISTORY) { historyStack.shift(); } }
             function undo() { if (historyStack.length === 0) { updateStatus("Nothing to undo.", false, 1500); return; } const currentState = getCurrentDesignState(); redoStack.push(currentState); const previousState = historyStack.pop(); applyDesignState(previousState, true); updateStatus("Undo.", false, 1000); }
             function redo() { if (redoStack.length === 0) { updateStatus("Nothing to redo.", false, 1500); return; } const currentState = getCurrentDesignState(); historyStack.push(currentState); const nextState = redoStack.pop(); applyDesignState(nextState, true); updateStatus("Redo.", false, 1000); }
+//mine
+    function resetBg() {   if (!isUndoingOrRedoing) saveStateForUndo();    applyContainerBackground('transparent', false);    containerBgColorInput.value = rgbToHex('transparent');   updateStatus('Container background removed.', false);
+}
 
 
             // --- Drag and Drop Handlers --- >> MODIFIED BELOW << ---
@@ -643,6 +684,9 @@ ${boxesHtml}
                 panelDeleteBoxBtn.addEventListener('click', () => deleteSelectedBoxes(false));
                 panelResetBoxBtn.addEventListener('click', resetSelectedBoxStyles);
                 resetGridBtn.addEventListener('click', resetGrid);
+                resetBgBtn.addEventListener('click', resetBg);
+
+
                 settingsHeaderToggle.addEventListener('click', toggleSettingsVisibility);
                 bentoGridContainer.addEventListener('click', (event) => { if (event.target === bentoGridContainer) { if (selectedBoxes.size > 0) { selectedBoxes.forEach(box => box.classList.remove('selected')); selectedBoxes.clear(); updateMultiSelectIndicator(); } } });
 
