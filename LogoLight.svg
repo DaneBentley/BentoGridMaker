@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 378.24 387.12">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        filter: url(#drop-shadow-2);
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-5);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-4);
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-5 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-6 {
+        fill: url(#linear-gradient);
+        filter: url(#drop-shadow-1);
+        opacity: .72;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="247.92" y1="247.88" x2="130.62" y2="130.58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f1f2f2"/>
+      <stop offset="1" stop-color="#e6e7e8"/>
+    </linearGradient>
+    <filter id="drop-shadow-1" x="1.2" y="11.04" width="376.08" height="376.08" filterUnits="userSpaceOnUse">
+      <feOffset dx="0" dy="10"/>
+      <feGaussianBlur result="blur" stdDeviation="35"/>
+      <feFlood flood-color="#000" flood-opacity=".36"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="drop-shadow-2" x="0" y="0" width="378.24" height="378.24" filterUnits="userSpaceOnUse">
+      <feOffset dx="0" dy="0"/>
+      <feGaussianBlur result="blur-2" stdDeviation="35"/>
+      <feFlood flood-color="#231f20" flood-opacity=".28"/>
+      <feComposite in2="blur-2" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient-2" x1="138.94" y1="147.51" x2="185.93" y2="175.02" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#66a2d8"/>
+      <stop offset="1" stop-color="#639fd5"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="200.78" y1="146.45" x2="244.88" y2="178.38" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f592a5"/>
+      <stop offset="1" stop-color="#f38599"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" x1="145.11" y1="205.32" x2="185" y2="242.39" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f89f6b"/>
+      <stop offset="1" stop-color="#f7925f"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-5" x1="202.33" y1="205.66" x2="245.12" y2="239.35" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd783"/>
+      <stop offset="1" stop-color="#fecb75"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <rect class="cls-6" x="106.23" y="106.19" width="165.89" height="165.89" rx="39.12" ry="39.12"/>
+      <rect class="cls-1" x="106.23" y="106.19" width="165.89" height="165.89" rx="39.12" ry="39.12"/>
+      <g>
+        <rect class="cls-5" x="131.99" y="132.15" width="54.45" height="54.45" rx="17.03" ry="17.03"/>
+        <rect class="cls-4" x="191.41" y="132.15" width="54.45" height="54.45" rx="17.03" ry="17.03"/>
+        <rect class="cls-3" x="132.49" y="191.67" width="54.45" height="54.45" rx="17.03" ry="17.03"/>
+        <rect class="cls-2" x="191.91" y="191.67" width="54.45" height="54.45" rx="17.03" ry="17.03"/>
+      </g>
+    </g>
+  </g>
+</svg>
